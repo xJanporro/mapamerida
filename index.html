@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Interactivo — Municipios y Parroquias</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button id="sidebarToggle" title="Ocultar/mostrar panel">‹</button>
+
+<div id="sidebar">
+  <div class="brand">
+    <img src="icons/logo.png" alt="Logo" class="brand-logo" onerror="this.style.display='none'">
+    <div>
+      <h1>Mapa Interactivo</h1>
+      <p class="brand-tagline">Municipios y Parroquias</p>
+    </div>
+  </div>
+
+  <div class="sidebar-scroll">
+    <div class="panel">
+      <h2>Buscar parroquia</h2>
+      <input type="text" id="searchBox" placeholder="Escribe un nombre..." autocomplete="off">
+      <div id="searchResults"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Filtrar por municipio</h2>
+      <button id="clearFilter" class="linklike">Mostrar todos</button>
+      <div id="municipioFilters" class="checkbox-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Parroquias del municipio seleccionado</h2>
+      <div id="parroquiaListPanel" class="checkbox-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Filtrar por tipo de marcador</h2>
+      <button id="clearTipoFilter" class="linklike">Mostrar todos</button>
+      <div id="tipoFilters" class="checkbox-list"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Tamaño de marcador</h2>
+      <div class="slider-row">
+        <input type="range" id="markerSize" min="16" max="80" step="2" value="40">
+        <span id="markerSizeLabel">40px</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Capas</h2>
+      <label><input type="checkbox" id="toggleMunicipios" checked> Municipios (polígonos)</label>
+      <label><input type="checkbox" id="toggleParroquias" checked> Parroquias (polígonos)</label>
+      <label><input type="checkbox" id="toggleMarkers" checked> Marcadores</label>
+    </div>
+
+    <div id="info" class="panel"></div>
+  </div>
+
+  <div class="sidebar-footer">Hecho por <strong>O.S.T.I</strong> - I.A.P.E.B.M</div>
+</div>
+
+<button id="sidebarShowBtn" title="Mostrar panel">☰</button>
+
+<div id="map"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
