@@ -66,11 +66,75 @@ function colorForText(text) {
 
 let municipioColors = {};
 let municipiosLayer, parroquiasLayer, markersLayer;
+let municipiosGeoData = null; // datos crudos, usados para asignar municipio a cada marcador
 let activeMunicipios = new Set(); // vacío = mostrar todos
 let activeTipos = new Set(); // vacío = mostrar todos
 let allParroquiaFeatures = [];
 let allMarkers = []; // [{ marker, tipo, iconUrl }]
 let selectedLayer = null;
+let lastUpdated = null; // Date de la última carga exitosa de marcadores.geojson
+let markersLoadFailed = false;
+
+// ---------- Utilidad: tiempo relativo ("hace 2 min") ----------
+function timeAgo(date) {
+  const diffSec = Math.floor((Date.now() - date.getTime()) / 1000);
+  if (diffSec < 10) return "justo ahora";
+  if (diffSec < 60) return `hace ${diffSec}s`;
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `hace ${diffMin} min`;
+  const diffHr = Math.floor(diffMin / 60);
+  if (diffHr < 24) return `hace ${diffHr} h`;
+  const diffDay = Math.floor(diffHr / 24);
+  return `hace ${diffDay} d`;
+}
+
+// ---------- Utilidad: punto dentro de polígono (ray casting) ----------
+// Soporta Polygon y MultiPolygon, respetando huecos (rings adicionales).
+function pointInRing(lng, lat, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i];
+    const [xj, yj] = ring[j];
+    const intersects =
+      yi > lat !== yj > lat &&
+      lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi;
+    if (intersects) inside = !inside;
+  }
+  return inside;
+}
+function pointInPolygonRings(lng, lat, rings) {
+  if (!pointInRing(lng, lat, rings[0])) return false;
+  for (let i = 1; i < rings.length; i++) {
+    if (pointInRing(lng, lat, rings[i])) return false; // dentro de un hueco
+  }
+  return true;
+}
+function municipioForPoint(lng, lat) {
+  if (!municipiosGeoData) return null;
+  for (const f of municipiosGeoData.features) {
+    const geom = f.geometry;
+    if (!geom) continue;
+    if (geom.type === "Polygon") {
+      if (pointInPolygonRings(lng, lat, geom.coordinates))
+        return f.properties.Municipio;
+    } else if (geom.type === "MultiPolygon") {
+      for (const polygon of geom.coordinates) {
+        if (pointInPolygonRings(lng, lat, polygon))
+          return f.properties.Municipio;
+      }
+    }
+  }
+  return null;
+}
+// Asigna (una sola vez, con caché) el municipio a cada marcador según su posición.
+function ensureMarkerMunicipios() {
+  if (!municipiosGeoData) return;
+  allMarkers.forEach((m) => {
+    if (m.municipio !== undefined) return;
+    const { lat, lng } = m.marker.getLatLng();
+    m.municipio = municipioForPoint(lng, lat) || "Sin municipio";
+  });
+}
 
 // ---------- Estilos de parroquia ----------
 function parroquiaBaseStyle(feature) {
@@ -93,6 +157,7 @@ const PARROQUIA_HOVER_STYLE = { weight: 2.5, fillOpacity: 0.2 };
 fetch("data/municipios.geojson")
   .then((r) => r.json())
   .then((data) => {
+    municipiosGeoData = data;
     const nombres = [
       ...new Set(data.features.map((f) => f.properties.Municipio)),
     ].sort();
@@ -178,7 +243,9 @@ fetch("data/parroquias.geojson")
 
 // ---------- Cargar Marcadores (opcional — exportado desde geojson.io) ----------
 function createMarkersLayer() {
-  return clusteringEnabled ? L.markerClusterGroup() : L.layerGroup();
+  return clusteringEnabled
+    ? L.markerClusterGroup()
+    : L.layerGroup();
 }
 
 markersLayer = createMarkersLayer();
@@ -219,16 +286,21 @@ fetch("data/marcadores.geojson")
     console.log(
       `marcadores.geojson cargado: ${allMarkers.length} marcador(es), tipos: ${[...new Set(allMarkers.map((m) => m.tipo))].join(", ")}`,
     );
+    lastUpdated = new Date();
     buildTipoFilterList();
     applyMarkerFilter();
+    updateStatusBar();
   })
   .catch((err) => {
     console.error(
       "No se pudo cargar data/marcadores.geojson — revisa que el archivo exista y que su JSON sea válido:",
       err,
     );
+    markersLoadFailed = true;
+    lastUpdated = new Date();
     document.getElementById("tipoFilters").innerHTML =
       '<p class="muted">Sin marcadores todavía.</p>';
+    updateStatusBar();
   });
 
 function buildIcon(iconUrl, size) {
@@ -469,7 +541,32 @@ function updateInfoPanel() {
 
   document.getElementById("info").innerHTML =
     `${totalParroquias} parroquia(s) visibles · ${totalMarkers} marcador(es) visibles`;
+
+  updateStatusBar(totalParroquias, totalMarkers);
+  if (statsOpen) renderStats();
 }
+
+// ---------- Barra de estado (última actualización + resumen) ----------
+function updateStatusBar(totalParroquias, totalMarkers) {
+  const statusUpdated = document.getElementById("statusUpdated");
+  const statusCounts = document.getElementById("statusCounts");
+  const statusDot = document.querySelector("#statusBar .status-dot");
+
+  if (lastUpdated) {
+    statusUpdated.textContent = markersLoadFailed
+      ? `Sin datos de marcadores (${timeAgo(lastUpdated)})`
+      : `Actualizado ${timeAgo(lastUpdated)}`;
+    statusUpdated.title = lastUpdated.toLocaleString("es-VE");
+    statusDot.classList.toggle("stale", markersLoadFailed);
+  } else {
+    statusUpdated.textContent = "Cargando datos…";
+  }
+
+  if (totalParroquias === undefined || totalMarkers === undefined) return;
+  statusCounts.textContent = `${totalParroquias} parroquia(s) · ${totalMarkers} marcador(es)`;
+}
+// Refresca el texto relativo ("hace X min") sin recalcular conteos
+setInterval(() => updateStatusBar(), 20000);
 
 // ---------- Capas on/off ----------
 document.getElementById("toggleMunicipios").addEventListener("change", (e) => {
@@ -598,3 +695,95 @@ function setSidebarCollapsed(collapsed) {
 
 sidebarCollapseBtn.addEventListener("click", () => setSidebarCollapsed(true));
 sidebarReopenBtn.addEventListener("click", () => setSidebarCollapsed(false));
+
+// ---------- 8) Panel de Estadísticas (bottom sheet) ----------
+const statusBar = document.getElementById("statusBar");
+const statsSheet = document.getElementById("statsSheet");
+const statsOverlay = document.getElementById("statsOverlay");
+const statsCloseBtn = document.getElementById("statsCloseBtn");
+let statsOpen = false;
+
+function openStats() {
+  statsOpen = true;
+  statsSheet.classList.add("open");
+  statsOverlay.classList.add("open");
+  statsSheet.setAttribute("aria-hidden", "false");
+  renderStats();
+}
+function closeStats() {
+  statsOpen = false;
+  statsSheet.classList.remove("open");
+  statsOverlay.classList.remove("open");
+  statsSheet.setAttribute("aria-hidden", "true");
+}
+
+statusBar.addEventListener("click", openStats);
+statsCloseBtn.addEventListener("click", closeStats);
+statsOverlay.addEventListener("click", closeStats);
+
+// Extiende Escape para cerrar también el panel de estadísticas
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && statsOpen) closeStats();
+});
+
+function buildStatRows(container, counts, colorFor) {
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  if (entries.length === 0) {
+    container.innerHTML = '<p class="stat-empty">Sin datos disponibles.</p>';
+    return;
+  }
+  const max = entries[0][1];
+  container.innerHTML = entries
+    .map(([label, count]) => {
+      const pct = Math.max(4, Math.round((count / max) * 100));
+      const color = colorFor(label);
+      return `
+        <div class="stat-row">
+          <div class="stat-row-top">
+            <span class="stat-label">${label}</span>
+            <span class="stat-value">${count}</span>
+          </div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${pct}%; background:${color}"></div></div>
+        </div>`;
+    })
+    .join("");
+}
+
+function renderStats() {
+  const showAllTipos = activeTipos.size === 0;
+  const showAllMunicipios = activeMunicipios.size === 0;
+  const visibleMarkers = allMarkers.filter(
+    (m) => showAllTipos || activeTipos.has(m.tipo),
+  );
+
+  document.getElementById("statsMeta").textContent = lastUpdated
+    ? `${visibleMarkers.length} de ${allMarkers.length} marcador(es) visibles · datos ${timeAgo(lastUpdated)}`
+    : "Cargando datos…";
+
+  // Por tipo
+  const porTipo = {};
+  visibleMarkers.forEach((m) => {
+    porTipo[m.tipo] = (porTipo[m.tipo] || 0) + 1;
+  });
+  buildStatRows(document.getElementById("statsPorTipo"), porTipo, colorForText);
+
+  // Por municipio (requiere point-in-polygon contra municipios.geojson)
+  const porMunicipioEl = document.getElementById("statsPorMunicipio");
+  if (!municipiosGeoData) {
+    porMunicipioEl.innerHTML =
+      '<p class="stat-empty">Cargando límites de municipios…</p>';
+  } else {
+    ensureMarkerMunicipios();
+    const porMunicipio = {};
+    visibleMarkers
+      .filter((m) => showAllMunicipios || activeMunicipios.has(m.municipio))
+      .forEach((m) => {
+        porMunicipio[m.municipio] = (porMunicipio[m.municipio] || 0) + 1;
+      });
+    buildStatRows(
+      porMunicipioEl,
+      porMunicipio,
+      (nombre) => municipioColors[nombre] || "#8fa6c4",
+    );
+  }
+}
