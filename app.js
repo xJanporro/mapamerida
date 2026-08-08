@@ -74,6 +74,10 @@ let allMarkers = []; // [{ marker, tipo, iconUrl }]
 let selectedLayer = null;
 let lastUpdated = null; // Date de la última carga exitosa de marcadores.geojson
 let markersLoadFailed = false;
+let currentLayout = localStorage.getItem("layout") || "main"; // "main" | "heat"
+let heatLayer = null;
+let heatEnabled = localStorage.getItem("heatEnabled") !== "false";
+let riskZones = [];
 
 // ---------- Utilidad: tiempo relativo ("hace 2 min") ----------
 function timeAgo(date) {
@@ -96,8 +100,7 @@ function pointInRing(lng, lat, ring) {
     const [xi, yi] = ring[i];
     const [xj, yj] = ring[j];
     const intersects =
-      yi > lat !== yj > lat &&
-      lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi;
+      yi > lat !== yj > lat && lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi;
     if (intersects) inside = !inside;
   }
   return inside;
@@ -193,6 +196,7 @@ fetch("data/municipios.geojson")
     }).addTo(map);
 
     buildMunicipioFilterList(nombres);
+    syncLayersForLayout();
   });
 
 // ---------- Cargar Parroquias ----------
@@ -239,13 +243,12 @@ fetch("data/parroquias.geojson")
     }).addTo(map);
 
     applyFilter();
+    syncLayersForLayout();
   });
 
 // ---------- Cargar Marcadores (opcional — exportado desde geojson.io) ----------
 function createMarkersLayer() {
-  return clusteringEnabled
-    ? L.markerClusterGroup()
-    : L.layerGroup();
+  return clusteringEnabled ? L.markerClusterGroup() : L.layerGroup();
 }
 
 markersLayer = createMarkersLayer();
@@ -290,6 +293,7 @@ fetch("data/marcadores.geojson")
     buildTipoFilterList();
     applyMarkerFilter();
     updateStatusBar();
+    syncLayersForLayout();
   })
   .catch((err) => {
     console.error(
@@ -310,6 +314,103 @@ function buildIcon(iconUrl, size) {
     iconAnchor: [size / 2, size],
     popupAnchor: [0, -size],
   });
+}
+
+// ---------- Zonas de Riesgo (mapa de calor) — múltiples conjuntos de datos ----------
+// Cada archivo vive en data/heatmaps/ y contiene puntos con
+// { intensidad: 1-10, nombre?, descripcion? }. Para agregar una nueva zona:
+// 1) coloca el .geojson en data/heatmaps/
+// 2) agrega una entrada aquí abajo con un id único, la etiqueta a mostrar
+//    en el selector, y la ruta del archivo.
+const HEATMAP_DATASETS = [
+  {
+    id: "principal",
+    label: "Zona de riesgo",
+    file: "data/heatmaps/zona_riesgo_libertador.geojson",
+  },
+  // Ejemplo de cómo agregar más zonas en el futuro:
+  {
+    id: "metropolitana",
+    label: "Zona Metropolitana",
+    file: "data/heatmaps/zona_riesgo_metropolitana.geojson",
+  },
+  {
+    id: "pedregosa",
+    label: "Pedregosa",
+    file: "data/heatmaps/zona_riesgo_pedregosa_sur.geojson",
+  },
+];
+
+let currentHeatRadius = parseInt(
+  localStorage.getItem("heatRadius") || "45",
+  10,
+);
+
+function heatOptionsForRadius(radius) {
+  return {
+    radius,
+    blur: Math.round(radius * 0.78),
+    // Leaflet.heat atenúa la intensidad de cada punto cuanto más lejos esté
+    // el zoom actual de "maxZoom" (factor v = 1 / 2^(maxZoom - zoom)).
+    // Lo alineamos al zoom de reposo del mapa (ZOOM en la config de arriba)
+    // para que la zona se vea a toda intensidad en la vista normal de
+    // trabajo, en vez de diluirse por comparar contra el zoom máximo técnico.
+    maxZoom: ZOOM + 1,
+    gradient: {
+      0.2: "#1d4e89",
+      0.4: "#3d8fd6",
+      0.6: "#f2d675",
+      0.8: "#e8813a",
+      1.0: "#c22e2e",
+    },
+  };
+}
+
+// Carga (o recarga) el conjunto de datos de zonas de riesgo indicado por id,
+// reemplazando el heatLayer actual en el mapa si corresponde.
+function loadHeatmapDataset(id) {
+  const dataset =
+    HEATMAP_DATASETS.find((d) => d.id === id) || HEATMAP_DATASETS[0];
+  if (!dataset) return;
+
+  const wasOnMap = heatLayer && map.hasLayer(heatLayer);
+  if (heatLayer) map.removeLayer(heatLayer);
+  heatLayer = null;
+
+  const countEl = document.getElementById("heatZoneCount");
+  if (countEl) countEl.textContent = "Cargando…";
+
+  fetch(dataset.file)
+    .then((r) => {
+      if (!r.ok) throw new Error("conjunto de datos aún no disponible");
+      return r.json();
+    })
+    .then((data) => {
+      riskZones = data.features || [];
+      const points = riskZones.map((f) => {
+        const [lng, lat] = f.geometry.coordinates;
+        const intensidad =
+          f.properties && typeof f.properties.intensidad === "number"
+            ? f.properties.intensidad
+            : 5;
+        return [lat, lng, intensidad / 10];
+      });
+      heatLayer = L.heatLayer(points, heatOptionsForRadius(currentHeatRadius));
+      if (countEl)
+        countEl.textContent = `${riskZones.length} zona(s) registrada(s)`;
+      if (wasOnMap || currentLayout === "heat") syncLayersForLayout();
+    })
+    .catch((err) => {
+      console.error(
+        `No se pudo cargar ${dataset.file} — aún no hay datos para "${dataset.label}":`,
+        err,
+      );
+      riskZones = [];
+      heatLayer = null;
+      if (countEl)
+        countEl.textContent = `Aún no se han definido zonas para "${dataset.label}".`;
+      syncLayersForLayout();
+    });
 }
 
 // Popup estilizado y extensible: cualquier propiedad nueva que agregues en geojson.io
@@ -787,3 +888,103 @@ function renderStats() {
     );
   }
 }
+
+// ---------- 9) Layouts: Principal / Mapa de calor ----------
+const layoutTabs = document.querySelectorAll(".layout-tab");
+const layoutPanelMain = document.getElementById("layoutPanelMain");
+const layoutPanelHeat = document.getElementById("layoutPanelHeat");
+const heatLayerToggle = document.getElementById("toggleHeatLayer");
+const heatDatasetSelect = document.getElementById("heatDatasetSelect");
+const heatRadiusSlider = document.getElementById("heatRadius");
+const heatRadiusLabel = document.getElementById("heatRadiusLabel");
+const heatMunicipiosToggle = document.getElementById("toggleHeatMunicipios");
+const heatParroquiasToggle = document.getElementById("toggleHeatParroquias");
+
+function applyLayoutUI() {
+  layoutTabs.forEach((btn) =>
+    btn.classList.toggle("active", btn.dataset.layout === currentLayout),
+  );
+  layoutPanelMain.hidden = currentLayout !== "main";
+  layoutPanelHeat.hidden = currentLayout !== "heat";
+}
+
+// Decide qué capas van sobre el mapa según el layout activo. Se llama cada
+// vez que cambia el layout, cada switch relevante, y cada vez que una capa
+// termina de cargarse (por si el layout guardado en localStorage era "heat"
+// antes de que los datos estuvieran listos).
+function syncLayersForLayout() {
+  if (currentLayout === "heat") {
+    if (markersLayer) map.removeLayer(markersLayer);
+    const munOn = heatMunicipiosToggle.checked;
+    const parOn = heatParroquiasToggle.checked;
+    if (municipiosLayer)
+      munOn ? map.addLayer(municipiosLayer) : map.removeLayer(municipiosLayer);
+    if (parroquiasLayer)
+      parOn ? map.addLayer(parroquiasLayer) : map.removeLayer(parroquiasLayer);
+    if (heatLayer) {
+      heatEnabled ? map.addLayer(heatLayer) : map.removeLayer(heatLayer);
+    }
+  } else {
+    if (heatLayer) map.removeLayer(heatLayer);
+    const munOn = document.getElementById("toggleMunicipios").checked;
+    const parOn = document.getElementById("toggleParroquias").checked;
+    const markOn = document.getElementById("toggleMarkers").checked;
+    if (municipiosLayer)
+      munOn ? map.addLayer(municipiosLayer) : map.removeLayer(municipiosLayer);
+    if (parroquiasLayer)
+      parOn ? map.addLayer(parroquiasLayer) : map.removeLayer(parroquiasLayer);
+    if (markersLayer)
+      markOn ? map.addLayer(markersLayer) : map.removeLayer(markersLayer);
+  }
+}
+
+layoutTabs.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentLayout = btn.dataset.layout;
+    localStorage.setItem("layout", currentLayout);
+    applyLayoutUI();
+    syncLayersForLayout();
+  });
+});
+
+heatLayerToggle.checked = heatEnabled;
+heatLayerToggle.addEventListener("change", (e) => {
+  heatEnabled = e.target.checked;
+  localStorage.setItem("heatEnabled", heatEnabled);
+  syncLayersForLayout();
+});
+
+heatMunicipiosToggle.addEventListener("change", syncLayersForLayout);
+heatParroquiasToggle.addEventListener("change", syncLayersForLayout);
+
+// ---------- 10) Selector de conjunto de datos del mapa de calor ----------
+HEATMAP_DATASETS.forEach((d) => {
+  const opt = document.createElement("option");
+  opt.value = d.id;
+  opt.textContent = d.label;
+  heatDatasetSelect.appendChild(opt);
+});
+const savedDatasetId = localStorage.getItem("heatDataset");
+const initialDatasetId = HEATMAP_DATASETS.some((d) => d.id === savedDatasetId)
+  ? savedDatasetId
+  : HEATMAP_DATASETS[0]?.id;
+if (initialDatasetId) heatDatasetSelect.value = initialDatasetId;
+
+heatDatasetSelect.addEventListener("change", (e) => {
+  localStorage.setItem("heatDataset", e.target.value);
+  loadHeatmapDataset(e.target.value);
+});
+
+// ---------- 11) Slider de tamaño de zona (radio del heatmap) ----------
+heatRadiusSlider.value = currentHeatRadius;
+heatRadiusLabel.textContent = currentHeatRadius + "px";
+heatRadiusSlider.addEventListener("input", () => {
+  currentHeatRadius = parseInt(heatRadiusSlider.value, 10);
+  heatRadiusLabel.textContent = currentHeatRadius + "px";
+  localStorage.setItem("heatRadius", currentHeatRadius);
+  if (heatLayer) heatLayer.setOptions(heatOptionsForRadius(currentHeatRadius));
+});
+
+applyLayoutUI();
+if (initialDatasetId) loadHeatmapDataset(initialDatasetId);
+syncLayersForLayout();
