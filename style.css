@@ -323,7 +323,7 @@ body.sidebar-collapsed .sidebar-reopen-btn {
   color: var(--text-faint);
   pointer-events: none;
 }
-#searchBox {
+.search-wrap input {
   width: 100%;
   padding: 9px 10px 9px 32px;
   border-radius: var(--radius-sm);
@@ -335,10 +335,10 @@ body.sidebar-collapsed .sidebar-reopen-btn {
   outline: none;
   transition: border-color 0.15s ease;
 }
-#searchBox:focus {
+.search-wrap input:focus {
   border-color: var(--accent);
 }
-#searchBox::placeholder {
+.search-wrap input::placeholder {
   color: var(--text-faint);
 }
 
@@ -360,6 +360,10 @@ body.sidebar-collapsed .sidebar-reopen-btn {
   background: var(--accent-soft);
   border-color: var(--border);
   color: var(--text);
+}
+
+.search-wrap--compact {
+  margin-bottom: 10px;
 }
 
 /* ---------- Listas con checkbox (filtros) ---------- */
@@ -459,16 +463,102 @@ body.sidebar-collapsed .sidebar-reopen-btn {
   margin: 0;
 }
 
-.parroquia-item {
-  padding: 6px 9px;
-  border-radius: 7px;
-  cursor: pointer;
+/* ---------- Filtro por parroquia: lista plana agrupada, un solo scroll ---------- */
+.parroquia-scroll-list {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado de cada municipio: no es un botón ni se colapsa, es solo un
+   separador visual que queda pegado arriba mientras se hace scroll dentro
+   del grupo, para saber siempre en qué municipio se está mirando. */
+.parroquia-group__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 8px 6px;
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  z-index: 1;
+}
+.parroquia-group:first-child .parroquia-group__header {
+  padding-top: 2px;
+}
+.parroquia-group__header .swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06);
+}
+.parroquia-group__name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.parroquia-group__count {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-faint);
+}
+
+.parroquia-scroll-list label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 8px 6px 16px;
+  border-radius: 6px;
   font-size: 13px;
   color: var(--text-dim);
+  cursor: pointer;
+  transition: background 0.4s ease;
 }
-.parroquia-item:hover {
+.parroquia-scroll-list label:hover {
+  background: var(--panel-2);
+  color: var(--text);
+}
+.parroquia-scroll-list label.parroquia-row--flash {
   background: var(--accent-soft);
   color: var(--text);
+  transition: background 0.1s ease;
+}
+.parroquia-scroll-list input[type="checkbox"] {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-elevated);
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+}
+.parroquia-scroll-list input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.parroquia-scroll-list input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #0a0d12;
+  border-width: 0 2px 2px 0;
+  transform: rotate(40deg);
 }
 
 /* =========================================================
@@ -1205,7 +1295,8 @@ body.sidebar-collapsed #statsSheet {
     width: 100%;
     max-width: 100%;
   }
-  .checkbox-list {
+  .checkbox-list,
+  .parroquia-scroll-list {
     max-height: 150px;
   }
   #searchResults {
@@ -1259,7 +1350,8 @@ body.sidebar-collapsed #statsSheet {
   #map {
     height: 50vh;
   }
-  .checkbox-list {
+  .checkbox-list,
+  .parroquia-scroll-list {
     max-height: 100px;
   }
 }

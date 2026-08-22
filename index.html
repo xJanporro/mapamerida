@@ -122,8 +122,28 @@
       </div>
 
       <div class="panel">
-        <h2>Parroquias del municipio seleccionado</h2>
-        <div id="parroquiaListPanel" class="checkbox-list"></div>
+        <h2>Filtrar por parroquia</h2>
+        <div class="search-wrap search-wrap--compact">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" stroke-linecap="round" />
+          </svg>
+          <input
+            type="text"
+            id="parroquiaFilterSearch"
+            placeholder="Filtrar lista..."
+            autocomplete="off"
+          />
+        </div>
+        <button id="clearParroquiaFilter" class="linklike">
+          Mostrar todas
+        </button>
+        <div id="parroquiaListPanel" class="parroquia-scroll-list"></div>
       </div>
 
       <div class="panel">

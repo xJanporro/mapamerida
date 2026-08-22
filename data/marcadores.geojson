@@ -166,9 +166,10 @@
       },
       "properties": {
         "name": "C.C.P 10 - Nueva Bolivia",
-        "description": "Av. 6, Nueva Bolivia, Mérida",
+        "description": "Av. 6, Nueva Bolivia, Méridaa",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 42
       }
     },
     {

@@ -14,6 +14,17 @@ const PIN_ICON_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
 const map = L.map("map", { zoomControl: false }).setView(CENTER, ZOOM);
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
+// Panes con z-index explícito para municipios y parroquias. Sin esto, el orden
+// visual dependía de cuál fetch (municipios.geojson o parroquias.geojson)
+// terminara de cargar primero — si parroquias ganaba la carrera, su capa
+// quedaba añadida al mapa antes que la de municipios, y una parroquia resaltada
+// se veía "tapada" por el relleno de los municipios. Con panes fijos, parroquias
+// siempre se dibuja por encima de municipios, sin importar el orden de llegada.
+map.createPane("municipiosPane");
+map.getPane("municipiosPane").style.zIndex = 410;
+map.createPane("parroquiasPane");
+map.getPane("parroquiasPane").style.zIndex = 420; // siempre encima de municipiosPane
+
 // ---------- Mapas base (calles / satélite) ----------
 const baseStreets = L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -68,6 +79,7 @@ let municipioColors = {};
 let municipiosLayer, parroquiasLayer, markersLayer;
 let municipiosGeoData = null; // datos crudos, usados para asignar municipio a cada marcador
 let activeMunicipios = new Set(); // vacío = mostrar todos
+let activeParroquias = new Set(); // vacío = mostrar todas (filtro independiente, combinado con activeMunicipios por AND)
 let activeTipos = new Set(); // vacío = mostrar todos
 let allParroquiaFeatures = [];
 let allMarkers = []; // [{ marker, tipo, iconUrl }]
@@ -169,6 +181,7 @@ fetch("data/municipios.geojson")
     });
 
     municipiosLayer = L.geoJSON(data, {
+      pane: "municipiosPane",
       style: (f) => ({
         color: "#111",
         weight: 1,
@@ -206,6 +219,7 @@ fetch("data/parroquias.geojson")
     allParroquiaFeatures = data.features;
 
     parroquiasLayer = L.geoJSON(data, {
+      pane: "parroquiasPane",
       style: parroquiaBaseStyle,
       onEachFeature: (f, layer) => {
         const color = municipioColors[f.properties.Municipio] || "#3d7dff";
@@ -225,8 +239,10 @@ fetch("data/parroquias.geojson")
         // Una parroquia oculta por el filtro no debe reaccionar a click/hover del mouse
         // (si no, "aparece" en pantalla aunque el filtro diga que no debería mostrarse)
         const isVisible = () =>
-          activeMunicipios.size === 0 ||
-          activeMunicipios.has(f.properties.Municipio);
+          (activeMunicipios.size === 0 ||
+            activeMunicipios.has(f.properties.Municipio)) &&
+          (activeParroquias.size === 0 ||
+            activeParroquias.has(f.properties.Parroquia_pcode));
 
         layer.on("click", () => {
           if (isVisible()) selectParroquia(f.properties.Parroquia_pcode);
@@ -242,6 +258,7 @@ fetch("data/parroquias.geojson")
       },
     }).addTo(map);
 
+    buildParroquiaFilterList();
     applyFilter();
     syncLayersForLayout();
   });
@@ -413,17 +430,39 @@ function loadHeatmapDataset(id) {
     });
 }
 
+// Una propiedad "cuenta" para mostrarse si tiene un valor real: no undefined/null,
+// no string vacío o solo espacios. El número 0 SÍ se muestra (ej. "estaciones: 0"
+// es información válida, distinta de "no se cargó el dato").
+function hasValue(v) {
+  if (v === null || v === undefined) return false;
+  if (typeof v === "string") return v.trim() !== "";
+  return true;
+}
+
+// "num_estaciones" -> "Num Estaciones" — así cualquier propiedad nueva del GeoJSON
+// (personal, num_estaciones, telefono, etc.) se ve prolija sin tener que
+// nombrarla a mano en el código.
+function prettifyLabel(key) {
+  return key
+    .replace(/[_-]+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 // Popup estilizado y extensible: cualquier propiedad nueva que agregues en geojson.io
 // (fuera de name/tipo/icon/description) aparece automáticamente aquí, sin tocar código.
+// Si una propiedad viene vacía (nunca se llenó ese dato para ese marcador en
+// particular), simplemente no se muestra esa fila — así conviven marcadores con
+// distinta cantidad de información sin dejar renglones vacíos en el popup.
 function buildMarkerPopup(props, tipo, reservedKeys) {
   const nombre = props.name || props.nombre || "Marcador";
   const color = colorForText(tipo);
   const extra = Object.entries(props).filter(
-    ([k]) => !reservedKeys.includes(k),
+    ([k, v]) => !reservedKeys.includes(k) && hasValue(v),
   );
 
   const extraHtml = extra.length
-    ? `<div class="popup-extra">${extra.map(([k, v]) => `<div class="popup-row"><span class="popup-label">${k}</span><span class="popup-value">${v}</span></div>`).join("")}</div>`
+    ? `<div class="popup-extra">${extra.map(([k, v]) => `<div class="popup-row"><span class="popup-label">${prettifyLabel(k)}</span><span class="popup-value">${v}</span></div>`).join("")}</div>`
     : "";
 
   return `
@@ -437,7 +476,7 @@ function buildMarkerPopup(props, tipo, reservedKeys) {
         </div>
       </div>
       <div class="popup-card__body">
-        ${props.description ? `<p class="popup-desc">${props.description}</p>` : ""}
+        ${hasValue(props.description) ? `<p class="popup-desc">${props.description}</p>` : ""}
         ${extraHtml}
       </div>
     </div>`;
@@ -465,6 +504,7 @@ function selectParroquia(pcode) {
   );
   if (!feature) return;
   const municipio = feature.properties.Municipio;
+  let filtersChanged = false;
 
   // Si la parroquia pertenece a un municipio oculto por el filtro, actívalo primero
   // (así lo que seleccionas siempre queda visible, sin "aparecer" contradiciendo el filtro)
@@ -474,8 +514,34 @@ function selectParroquia(pcode) {
       (i) => i.dataset.municipio === municipio,
     );
     if (cb) cb.checked = true;
-    applyFilter();
+    filtersChanged = true;
   }
+
+  // Mismo criterio para el filtro propio de parroquias: si está activo y no
+  // incluye esta parroquia, se agrega y se marca su checkbox en el acordeón.
+  if (activeParroquias.size > 0 && !activeParroquias.has(pcode)) {
+    activeParroquias.add(pcode);
+    const cb = document.querySelector(
+      `#parroquiaListPanel input[data-parroquia="${pcode}"]`,
+    );
+    if (cb) cb.checked = true;
+    filtersChanged = true;
+  }
+
+  // Desplaza el panel de parroquias hasta la fila correspondiente y la resalta
+  // un instante, para que sea evidente cuál quedó seleccionada aunque esté
+  // lejos del scroll actual.
+  const checkbox = document.querySelector(
+    `#parroquiaListPanel input[data-parroquia="${pcode}"]`,
+  );
+  const row = checkbox ? checkbox.closest("label") : null;
+  if (row) {
+    row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    row.classList.add("parroquia-row--flash");
+    setTimeout(() => row.classList.remove("parroquia-row--flash"), 900);
+  }
+
+  if (filtersChanged) applyFilter();
 
   if (selectedLayer)
     selectedLayer.setStyle(parroquiaBaseStyle(selectedLayer.feature));
@@ -579,18 +645,24 @@ document.getElementById("clearFilter").addEventListener("click", () => {
 
 function applyFilter() {
   if (!municipiosLayer || !parroquiasLayer) return;
-  const showAll = activeMunicipios.size === 0;
+  const showAllMunicipios = activeMunicipios.size === 0;
+  const showAllParroquias = activeParroquias.size === 0;
 
   municipiosLayer.eachLayer((layer) => {
     const match =
-      showAll || activeMunicipios.has(layer.feature.properties.Municipio);
+      showAllMunicipios ||
+      activeMunicipios.has(layer.feature.properties.Municipio);
     layer.setStyle({ opacity: match ? 1 : 0, fillOpacity: match ? 0.35 : 0 });
   });
 
   parroquiasLayer.eachLayer((layer) => {
-    const match =
-      showAll || activeMunicipios.has(layer.feature.properties.Municipio);
-    const base = parroquiaBaseStyle(layer.feature);
+    const f = layer.feature;
+    const municipioMatch =
+      showAllMunicipios || activeMunicipios.has(f.properties.Municipio);
+    const parroquiaMatch =
+      showAllParroquias || activeParroquias.has(f.properties.Parroquia_pcode);
+    const match = municipioMatch && parroquiaMatch;
+    const base = parroquiaBaseStyle(f);
     if (layer === selectedLayer) return; // no pisar el resaltado activo
     layer.setStyle({
       ...base,
@@ -599,42 +671,133 @@ function applyFilter() {
     });
   });
 
-  updateParroquiaListPanel(showAll);
   updateInfoPanel();
 }
 
-function updateParroquiaListPanel(showAll) {
+// ---------- Filtro por parroquia (acordeón desplegable, agrupado por municipio) ----------
+// Se genera una sola vez, al cargar parroquias.geojson. Cada municipio es un
+// <details> colapsable con sus parroquias como checkboxes — así se puede filtrar
+// por parroquia sin saturar el panel con cientos de opciones a la vista.
+// ---------- Filtro por parroquia (lista agrupada por municipio, siempre desplegada) ----------
+// Se genera una sola vez, al cargar parroquias.geojson. En vez de un acordeón
+// colapsable (que con 20+ municipios se veía como una pared de barras vacías),
+// es una única lista continua con su propia barra de scroll — igual que la de
+// municipios — separada por encabezados de sección por municipio, que quedan
+// "pegados" arriba mientras se hace scroll para ubicarse fácilmente.
+function buildParroquiaFilterList() {
   const container = document.getElementById("parroquiaListPanel");
   container.innerHTML = "";
-  if (showAll) {
-    container.innerHTML =
-      '<p class="muted">Selecciona un municipio para ver sus parroquias aquí.</p>';
+  container.classList.remove("checkbox-list");
+  container.classList.add("parroquia-scroll-list");
+
+  if (allParroquiaFeatures.length === 0) {
+    container.innerHTML = '<p class="muted">Sin parroquias cargadas.</p>';
     return;
   }
-  const filtradas = allParroquiaFeatures
-    .filter((f) => activeMunicipios.has(f.properties.Municipio))
-    .sort((a, b) =>
-      a.properties.Parroquia.localeCompare(b.properties.Parroquia),
-    );
 
-  filtradas.forEach((f) => {
-    const div = document.createElement("div");
-    div.className = "parroquia-item";
-    div.textContent = f.properties.Parroquia;
-    div.addEventListener("click", () =>
-      selectParroquia(f.properties.Parroquia_pcode),
-    );
-    container.appendChild(div);
+  const byMunicipio = {};
+  allParroquiaFeatures.forEach((f) => {
+    const m = f.properties.Municipio;
+    (byMunicipio[m] = byMunicipio[m] || []).push(f);
+  });
+
+  Object.keys(byMunicipio)
+    .sort()
+    .forEach((municipio) => {
+      const parroquias = byMunicipio[municipio].sort((a, b) =>
+        a.properties.Parroquia.localeCompare(b.properties.Parroquia),
+      );
+
+      const group = document.createElement("div");
+      group.className = "parroquia-group";
+      group.dataset.municipio = municipio;
+
+      const header = document.createElement("div");
+      header.className = "parroquia-group__header";
+      header.innerHTML = `
+        <span class="swatch" style="background:${municipioColors[municipio] || "#666"}"></span>
+        <span class="parroquia-group__name">${municipio}</span>
+        <span class="parroquia-group__count">${parroquias.length}</span>`;
+      group.appendChild(header);
+
+      parroquias.forEach((f) => {
+        const label = document.createElement("label");
+        label.innerHTML = `
+          <input type="checkbox" data-parroquia="${f.properties.Parroquia_pcode}">
+          ${f.properties.Parroquia}`;
+        group.appendChild(label);
+      });
+
+      container.appendChild(group);
+    });
+
+  container.addEventListener("change", (e) => {
+    if (e.target.matches("input[data-parroquia]")) {
+      const pcode = e.target.dataset.parroquia;
+      e.target.checked
+        ? activeParroquias.add(pcode)
+        : activeParroquias.delete(pcode);
+      applyFilter();
+    }
   });
 }
 
+document
+  .getElementById("clearParroquiaFilter")
+  .addEventListener("click", () => {
+    activeParroquias.clear();
+    document
+      .querySelectorAll("#parroquiaListPanel input")
+      .forEach((cb) => (cb.checked = false));
+    parroquiaFilterSearch.value = "";
+    filterParroquiaList("");
+    applyFilter();
+  });
+
+// Quita tildes/diacríticos para que "merida" encuentre "Mérida" sin importar
+// cómo se escriba la búsqueda.
+function normalizeText(str) {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+// Con 80+ parroquias, escanear la lista completa a ojo sigue siendo tedioso.
+// Este buscador filtra en vivo: oculta los municipios sin coincidencias y,
+// dentro de los que sí tienen, solo deja visibles las parroquias que matchean.
+function filterParroquiaList(query) {
+  const q = normalizeText(query.trim());
+  document
+    .querySelectorAll("#parroquiaListPanel .parroquia-group")
+    .forEach((group) => {
+      const municipioMatch = normalizeText(group.dataset.municipio || "").includes(q);
+      let anyVisible = false;
+      group.querySelectorAll("label").forEach((label) => {
+        const match = q === "" || municipioMatch || normalizeText(label.textContent).includes(q);
+        label.style.display = match ? "" : "none";
+        if (match) anyVisible = true;
+      });
+      group.style.display = anyVisible ? "" : "none";
+    });
+}
+
+const parroquiaFilterSearch = document.getElementById("parroquiaFilterSearch");
+parroquiaFilterSearch.addEventListener("input", () =>
+  filterParroquiaList(parroquiaFilterSearch.value),
+);
+
 function updateInfoPanel() {
-  const totalParroquias =
-    activeMunicipios.size === 0
-      ? allParroquiaFeatures.length
-      : allParroquiaFeatures.filter((f) =>
-          activeMunicipios.has(f.properties.Municipio),
-        ).length;
+  const showAllMunicipios = activeMunicipios.size === 0;
+  const showAllParroquias = activeParroquias.size === 0;
+  const totalParroquias = allParroquiaFeatures.filter((f) => {
+    const municipioMatch =
+      showAllMunicipios || activeMunicipios.has(f.properties.Municipio);
+    const parroquiaMatch =
+      showAllParroquias ||
+      activeParroquias.has(f.properties.Parroquia_pcode);
+    return municipioMatch && parroquiaMatch;
+  }).length;
   const totalMarkers =
     activeTipos.size === 0
       ? allMarkers.length
