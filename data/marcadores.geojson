@@ -12,8 +12,11 @@
         "description": "Avenida las Américas, Santa Bárbara Este, Edificio GRIM, Mérida",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 130,
-        "estaciones policiales": 3
+        "personal uniformado": 130,
+        "estaciones": "3 - EL VALLE, EL VALLECITO, BELEN",
+        "bicicletas": 20,
+        "patrullas": 3,
+        "motos": 38
       }
     },
     {
@@ -27,8 +30,11 @@
         "description": "Jacinto Plaza",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 36,
-        "estaciones policiales": 6
+        "personal uniformado": 36,
+        "estaciones": "6 - DON PERUCHO, 5 AGUILAS BLANCAS, EL MORRO, ARICAGUA, LOS NEVADOS",
+        "bicicletas": 0,
+        "patrullas": 3,
+        "motos": 4
       }
     },
     {
@@ -42,8 +48,11 @@
         "description": "Ejido",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 49,
-        "estaciones policiales": 0
+        "personal uniformado": 49,
+        "estaciones": 0,
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 2
       }
     },
     {
@@ -57,8 +66,11 @@
         "description": "Lagunillas",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 30,
-        "estaciones policiales": 2
+        "personal uniformado": 30,
+        "estaciones": "2 - SAN JUAN",
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 6
       }
     },
     {
@@ -72,8 +84,11 @@
         "description": "Tovar",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 37,
-        "estaciones policiales": 3
+        "personal uniformado": 37,
+        "estaciones": "3 - SANTA CRUZ, MESA BOLIVAR, ZEA",
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 7
       }
     },
     {
@@ -87,8 +102,11 @@
         "description": "Bailadores",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 19,
-        "estaciones policiales": 2
+        "personal uniformado": 19,
+        "estaciones": "2 - LA PALAYA, GUARAQUE",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 4
       }
     },
     {
@@ -102,8 +120,11 @@
         "description": "Canaguá",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 9,
-        "estaciones policiales": 0
+        "personal uniformado": 9,
+        "estaciones": 0,
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 1
       }
     },
     {
@@ -117,8 +138,12 @@
         "description": "El Vigía",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 112,
-        "estaciones policiales": 3
+        "personal uniformado": 112,
+        "estaciones": "3 - LA BLANCA, MUCUJEPE, LOS NARANJOS",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 6,
+        "cuadrante": "22C-076, 22C-090, 22C-091, 22C-092, 22C-095, 22C-099, 22C-100"
       }
     },
     {
@@ -132,8 +157,11 @@
         "description": "Santa Elena de Arenales",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 36,
-        "estaciones policiales": 2
+        "personal uniformado": 36,
+        "estaciones": "2 - LA AZULITA, GUAYABONES",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 8
       }
     },
     {
@@ -144,11 +172,14 @@
       },
       "properties": {
         "name": "C.C.P 10 - Nueva Bolivia",
-        "description": "Av. 6, Nueva Bolivia, Méridaa",
+        "description": "Av. 6, Nueva Bolivia, Mérida",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 68,
-        "estaciones policiales": 11
+        "personal uniformado": 68,
+        "estaciones": "11 - ARAPUEY, PALMARITO, SANTA APOLINIA, TUCANI, TORONDOY, PAC SAN PEDRO",
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 13
       }
     },
     {
@@ -162,8 +193,11 @@
         "description": "Mucuchíes",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 25,
-        "estaciones policiales": 1
+        "personal uniformado": 25,
+        "estaciones": "1 - TABAY",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 8
       }
     },
     {
@@ -177,8 +211,11 @@
         "description": "Santo Domingo",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 0,
-        "estaciones policiales": 0
+        "personal uniformado": 0,
+        "estaciones": 0,
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 0
       }
     },
     {
@@ -192,8 +229,11 @@
         "description": "Timotes",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 13,
-        "estaciones policiales": 2
+        "personal uniformado": 13,
+        "estaciones": "2 - CHACHOPO",
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 0
       }
     },
     {
@@ -206,8 +246,11 @@
         "name": "C.C.P 14 - Santa María de Caparo",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 9,
-        "estaciones policiales": 0
+        "personal uniformado": 9,
+        "estaciones policiales": 0,
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 0
       }
     },
 
@@ -375,7 +418,8 @@
       "properties": {
         "name": "Delegación Estadal Mérida y DM Mérida",
         "icon": "icons/cicpc.png",
-        "tipo": "CICPC"
+        "tipo": "CICPC",
+        "cuadrante": "22C-205"
       }
     },
     {
@@ -387,7 +431,8 @@
       "properties": {
         "name": "DM Vigía",
         "icon": "icons/cicpc.png",
-        "tipo": "CICPC"
+        "tipo": "CICPC",
+        "cuadrante": "22C-085"
       }
     },
     {
@@ -399,7 +444,8 @@
       "properties": {
         "name": "DM Tovar",
         "icon": "icons/cicpc.png",
-        "tipo": "CICPC"
+        "tipo": "CICPC",
+        "cuadrante": "22C-143"
       }
     },
 
