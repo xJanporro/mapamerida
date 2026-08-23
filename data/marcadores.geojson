@@ -210,6 +210,162 @@
         "estaciones policiales": 0
       }
     },
+
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.2021228, 8.5639055, 0]
+      },
+      "properties": {
+        "name": "Servicio Medico - I.A.P.E.B.M",
+        "description": "Av. J J Osuna",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1367948, 8.598491, 0]
+      },
+      "properties": {
+        "name": "Casilla Belén - I.A.P.E.B.M",
+        "description": "Av. 8 Paredes, Belén.",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1681718, 8.5725627, 0]
+      },
+      "properties": {
+        "name": "SIPPEBM - I.A.P.E.B.M",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1607589, 8.5814263, 0]
+      },
+      "properties": {
+        "name": "UENNAPEBM - I.A.P.E.B.M",
+        "description": "Av. 16 de Septiembre",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1609308, 8.5813136, 0]
+      },
+      "properties": {
+        "name": "DETRAMA - I.A.P.E.B.M",
+        "description": "Av. 16 de Septiembre",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1608624, 8.581364, 0]
+      },
+      "properties": {
+        "name": "Evidencia - I.A.P.E.B.M",
+        "description": "Av. 16 de Septiembre",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1599837, 8.592315, 0]
+      },
+      "properties": {
+        "name": "OIDP - I.A.P.E.B.M",
+        "description": "Los Sauzales",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1416802, 8.6024447, 0]
+      },
+      "properties": {
+        "name": "Policía Comunal - I.A.P.E.B.M",
+        "description": "Av. 1 Rodríguez Picón ",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1423308, 8.5985684, 0]
+      },
+      "properties": {
+        "name": "Brigada Ciclista - I.A.P.E.B.M",
+        "description": "Av. 4 Bolívar, Edif. Biblioteca Bolivariana",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.359091, 8.5064942, 0]
+      },
+      "properties": {
+        "name": "UENNAPEBM - San Juan",
+        "description": "El Calvario, San juan, Mérida",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1478092, 8.5981124, 0]
+      },
+      "properties": {
+        "name": "Brigada - I.A.P.E.B.M",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.4207041, 8.435486, 0]
+      },
+      "properties": {
+        "name": "Casilla Policial - Pueblos del Sur",
+        "description": "Pueblo Nuevo del Sur",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+
     {
       "type": "Feature",
       "geometry": {
@@ -244,6 +400,33 @@
         "name": "DM Tovar",
         "icon": "icons/cicpc.png",
         "tipo": "CICPC"
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1612368, 8.5846098, 0]
+      },
+      "properties": {
+        "name": "Policía Municipal Libertador",
+        "description": "Avenida Urdaneta",
+        "icon": "icons/municipal_libertador.png",
+        "tipo": "Policía Municipal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.2360137, 8.5428468, 0]
+      },
+      "properties": {
+        "name": "Policía Municipal Campo Elías",
+        "description": "C. Los Molinos, Ejido",
+        "icon": "icons/municipal_campo_elias.png",
+        "tipo": "Policía Municipal"
       }
     }
   ]
