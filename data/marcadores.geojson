@@ -5,238 +5,245 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.1725014,
-          8.5825039,
-          0
-        ]
+        "coordinates": [-71.1725014, 8.5825039, 0]
       },
       "properties": {
         "name": "C.C.P 01 - Mérida",
         "description": "Avenida las Américas, Santa Bárbara Este, Edificio GRIM, Mérida",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 130,
+        "estaciones policiales": 3
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.174328,
-          8.5647733,
-          0
-        ]
+        "coordinates": [-71.174328, 8.5647733, 0]
       },
       "properties": {
         "name": "C.C.P 02 - Jacinto Plaza",
         "description": "Jacinto Plaza",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 36,
+        "estaciones policiales": 6
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.2428538,
-          8.5463614,
-          0
-        ]
+        "coordinates": [-71.2428538, 8.5463614, 0]
       },
       "properties": {
         "name": "C.C.P 03 - Ejido",
         "description": "Ejido",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 49,
+        "estaciones policiales": 0
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.3885958,
-          8.5043327,
-          0
-        ]
+        "coordinates": [-71.3885958, 8.5043327, 0]
       },
       "properties": {
         "name": "C.C.P 04 . Lagunillas",
         "description": "Lagunillas",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 30,
+        "estaciones policiales": 2
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.7528171,
-          8.3304234,
-          0
-        ]
+        "coordinates": [-71.7528171, 8.3304234, 0]
       },
       "properties": {
         "name": "C.C.P 05 - Tovar",
         "description": "Tovar",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 37,
+        "estaciones policiales": 3
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.8290396,
-          8.250729,
-          0
-        ]
+        "coordinates": [-71.8290396, 8.250729, 0]
       },
       "properties": {
         "name": "C.C.P 06 - Bailadores",
         "description": "Bailadores",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 19,
+        "estaciones policiales": 2
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.4601542,
-          8.1251216,
-          0
-        ]
+        "coordinates": [-71.4601542, 8.1251216, 0]
       },
       "properties": {
         "name": "C.C.P 07 - Canaguá",
         "description": "Canaguá",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 9,
+        "estaciones policiales": 0
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.6495366,
-          8.6175672,
-          0
-        ]
+        "coordinates": [-71.6495366, 8.6175672, 0]
       },
       "properties": {
         "name": "C.C.P 08 - El Vigía",
         "description": "El Vigía",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 112,
+        "estaciones policiales": 3
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.4646172,
-          8.8189904,
-          0
-        ]
+        "coordinates": [-71.4646172, 8.8189904, 0]
       },
       "properties": {
         "name": "C.C.P 09 - Santa Elena de Arenales",
         "description": "Santa Elena de Arenales",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 36,
+        "estaciones policiales": 2
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.0926251,
-          9.1437828,
-          0
-        ]
+        "coordinates": [-71.0926251, 9.1437828, 0]
       },
       "properties": {
         "name": "C.C.P 10 - Nueva Bolivia",
         "description": "Av. 6, Nueva Bolivia, Méridaa",
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
-        "personal": 42
+        "personal": 68,
+        "estaciones policiales": 11
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -70.921310040421,
-          8.74782070334422,
-          0
-        ]
+        "coordinates": [-70.921310040421, 8.74782070334422, 0]
       },
       "properties": {
         "name": "C.C.P 11 - Mucuchíes",
         "description": "Mucuchíes",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 25,
+        "estaciones policiales": 1
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -70.6973120405157,
-          8.86023360152238,
-          0
-        ]
+        "coordinates": [-70.6973120405157, 8.86023360152238, 0]
       },
       "properties": {
         "name": "C.C.P 12 - Santo Domingo",
         "description": "Santo Domingo",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 0,
+        "estaciones policiales": 0
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -70.7389547122437,
-          8.98600593969463,
-          0
-        ]
+        "coordinates": [-70.7389547122437, 8.98600593969463, 0]
       },
       "properties": {
         "name": "C.C.P 13 - Timotes",
         "description": "Timotes",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 13,
+        "estaciones policiales": 2
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.4648240003273,
-          7.71653729303219,
-          0
-        ]
+        "coordinates": [-71.4648240003273, 7.71653729303219, 0]
       },
       "properties": {
         "name": "C.C.P 14 - Santa María de Caparo",
         "icon": "icons/iapebm.png",
-        "tipo": "IAPEBM - CCP"
+        "tipo": "IAPEBM - CCP",
+        "personal": 9,
+        "estaciones policiales": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1586, 8.5916, 0]
+      },
+      "properties": {
+        "name": "Delegación Estadal Mérida y DM Mérida",
+        "icon": "icons/cicpc.png",
+        "tipo": "CICPC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.6515, 8.6186, 0]
+      },
+      "properties": {
+        "name": "DM Vigía",
+        "icon": "icons/cicpc.png",
+        "tipo": "CICPC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.7594, 8.3386, 0]
+      },
+      "properties": {
+        "name": "DM Tovar",
+        "icon": "icons/cicpc.png",
+        "tipo": "CICPC"
       }
     }
   ]
