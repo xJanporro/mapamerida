@@ -34,7 +34,7 @@ const baseStreets = L.tileLayer(
   },
 );
 const baseSatellite = L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  "http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
   {
     attribution: "Tiles &copy; Esri",
     maxZoom: 19,
@@ -280,31 +280,171 @@ function rebuildMarkersLayer() {
   applyMarkerFilter();
 }
 
+// ---------- Cargar Marcadores (con panel de detalle + tablas) ----------
+function createMarkersLayer() {
+  return clusteringEnabled ? L.markerClusterGroup() : L.layerGroup();
+}
+markersLayer = createMarkersLayer();
+map.addLayer(markersLayer);
+
+function rebuildMarkersLayer() {
+  map.removeLayer(markersLayer);
+  markersLayer = createMarkersLayer();
+  map.addLayer(markersLayer);
+  applyMarkerFilter();
+}
+
+// Inyectar el panel de detalle en el DOM (una sola vez)
+document.body.insertAdjacentHTML(
+  "beforeend",
+  `<aside id="detailPanel" aria-hidden="true">
+     <div class="detail-panel__toolbar">
+       <button id="detailPanelCenterBtn" class="icon-btn" title="Centrar en el mapa">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+           <circle cx="12" cy="12" r="3"/>
+           <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke-linecap="round"/>
+         </svg>
+       </button>
+       <button id="detailPanelCloseBtn" class="icon-btn" title="Cerrar">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
+         </svg>
+       </button>
+     </div>
+     <div id="detailPanelBody" class="detail-panel__body"></div>
+   </aside>`
+);
+
+const detailPanel = document.getElementById("detailPanel");
+const detailPanelBody = document.getElementById("detailPanelBody");
+const detailPanelCloseBtn = document.getElementById("detailPanelCloseBtn");
+const detailPanelCenterBtn = document.getElementById("detailPanelCenterBtn");
+let currentDetailMarker = null;
+
+// Claves que NO se muestran como fila "extra" (ya tienen su lugar en la tarjeta)
+const RESERVED_KEYS = ["name", "nombre", "tipo", "icon", "description", "tabla", "tablaHeaders"];
+const POPUP_COLOR_KEYS = ["color", "institucion_color", "color_institucion"];
+const POPUP_LOGO_KEYS = ["institucion_logo", "logo_institucion", "logo"];
+
+function pickProp(props, keys) {
+  for (const k of keys) if (hasValue(props[k])) return props[k];
+  return null;
+}
+
+// Construye la tarjeta HTML (reemplaza a buildMarkerPopup)
+function buildEntityCardHtml(props, tipo) {
+  const nombre = props.name || props.nombre || "Marcador";
+  const logoUrl = pickProp(props, POPUP_LOGO_KEYS);
+  const color = pickProp(props, POPUP_COLOR_KEYS) || colorForText(tipo);
+
+  // Filas extra (propiedades que no son reservadas y tienen valor)
+  const extra = Object.entries(props).filter(
+    ([k, v]) => !RESERVED_KEYS.includes(k) && !POPUP_COLOR_KEYS.includes(k) && !POPUP_LOGO_KEYS.includes(k) && hasValue(v)
+  );
+  const extraHtml = extra.length
+    ? `<div class="popup-extra">${extra
+        .map(
+          ([k, v]) =>
+            `<div class="popup-row"><span class="popup-label">${prettifyLabel(k)}</span><span class="popup-value">${v}</span></div>`
+        )
+        .join("")}</div>`
+    : "";
+
+  // Renderizar tabla si existe
+  let tableHtml = "";
+  if (props.tabla && Array.isArray(props.tabla) && props.tabla.length > 0) {
+    const headers = props.tablaHeaders || Object.keys(props.tabla[0]);
+    tableHtml = `
+      <div class="detail-table-wrap">
+        <table class="detail-table">
+          <thead>
+            <tr>${headers.map((h) => `<th>${h}</th>`).join("")}</tr>
+          </thead>
+          <tbody>
+            ${props.tabla
+              .map(
+                (row) =>
+                  `<tr>${headers.map((h) => `<td>${row[h] !== undefined && row[h] !== null ? row[h] : ""}</td>`).join("")}</tr>`
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>`;
+  }
+
+  const hasTable = tableHtml !== "";
+  const badgeContent = logoUrl
+    ? `<img src="${logoUrl}" alt="" class="popup-badge__img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" /><span class="popup-badge__fallback">${SHIELD_ICON_SVG}</span>`
+    : SHIELD_ICON_SVG;
+
+  return `<div class="popup-card${hasTable ? " popup-card--has-table" : ""}" style="--card-color:${color}">
+    <div class="popup-card__accent"></div>
+    <div class="popup-card__header">
+      <span class="popup-badge${logoUrl ? " popup-badge--logo" : ""}">${badgeContent}</span>
+      <div class="popup-card__title">
+        <strong>${nombre}</strong>
+        <span class="popup-card__type">${tipo}</span>
+      </div>
+    </div>
+    <div class="popup-card__body">
+      ${hasValue(props.description) ? `<p class="popup-desc">${props.description}</p>` : ""}
+      ${extraHtml}
+      ${tableHtml}
+    </div>
+  </div>`;
+}
+
+function openDetailPanel(marker, props, tipo) {
+  currentDetailMarker = marker;
+  detailPanelBody.innerHTML = buildEntityCardHtml(props, tipo);
+
+  const hasTable = props.tabla && Array.isArray(props.tabla) && props.tabla.length > 0;
+  detailPanel.classList.toggle("detail-panel--has-table", hasTable);
+
+  detailPanel.classList.add("open");
+  detailPanel.setAttribute("aria-hidden", "false");
+}
+
+function closeDetailPanel() {
+  if (!detailPanel.classList.contains("open")) return;
+  detailPanel.classList.remove("open");
+  detailPanel.setAttribute("aria-hidden", "true");
+  currentDetailMarker = null;
+}
+
+detailPanelCloseBtn.addEventListener("click", closeDetailPanel);
+detailPanelCenterBtn.addEventListener("click", () => {
+  if (!currentDetailMarker) return;
+  map.setView(currentDetailMarker.getLatLng(), Math.max(map.getZoom(), 14));
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && detailPanel.classList.contains("open")) closeDetailPanel();
+});
+
+// Cargar marcadores
 fetch("data/marcadores.geojson")
   .then((r) => {
     if (!r.ok) throw new Error("sin marcadores todavía");
     return r.json();
   })
   .then((data) => {
-    const reservedKeys = ["name", "nombre", "tipo", "icon", "description"];
-
     data.features.forEach((f) => {
       const props = f.properties || {};
       const tipo = props.tipo || "Sin tipo";
       const iconUrl = props.icon || "icons/default.png";
       const coords = f.geometry.coordinates;
       const latlng = [coords[1], coords[0]];
-
-      const marker = L.marker(latlng, {
-        icon: buildIcon(iconUrl, currentMarkerSize),
+      const marker = L.marker(latlng, { icon: buildIcon(iconUrl, currentMarkerSize) });
+      marker.on("click", (e) => {
+        L.DomEvent.stopPropagation(e); // evita que el click llegue al mapa y cierre el panel
+        openDetailPanel(marker, props, tipo);
       });
-      marker.bindPopup(buildMarkerPopup(props, tipo, reservedKeys));
-
       allMarkers.push({ marker, tipo, iconUrl });
     });
-
     console.log(
-      `marcadores.geojson cargado: ${allMarkers.length} marcador(es), tipos: ${[...new Set(allMarkers.map((m) => m.tipo))].join(", ")}`,
+      `marcadores.geojson cargado: ${allMarkers.length} marcador(es), tipos: ${[
+        ...new Set(allMarkers.map((m) => m.tipo)),
+      ].join(", ")}`
     );
     lastUpdated = new Date();
     buildTipoFilterList();
@@ -315,12 +455,11 @@ fetch("data/marcadores.geojson")
   .catch((err) => {
     console.error(
       "No se pudo cargar data/marcadores.geojson — revisa que el archivo exista y que su JSON sea válido:",
-      err,
+      err
     );
     markersLoadFailed = true;
     lastUpdated = new Date();
-    document.getElementById("tipoFilters").innerHTML =
-      '<p class="muted">Sin marcadores todavía.</p>';
+    document.getElementById("tipoFilters").innerHTML = '<p class="muted">Sin marcadores todavía.</p>';
     updateStatusBar();
   });
 
@@ -454,33 +593,33 @@ function prettifyLabel(key) {
 // Si una propiedad viene vacía (nunca se llenó ese dato para ese marcador en
 // particular), simplemente no se muestra esa fila — así conviven marcadores con
 // distinta cantidad de información sin dejar renglones vacíos en el popup.
-function buildMarkerPopup(props, tipo, reservedKeys) {
-  const nombre = props.name || props.nombre || "Marcador";
-  const color = colorForText(tipo);
-  const extra = Object.entries(props).filter(
-    ([k, v]) => !reservedKeys.includes(k) && hasValue(v),
-  );
+// function buildMarkerPopup(props, tipo, reservedKeys) {
+//   const nombre = props.name || props.nombre || "Marcador";
+//   const color = colorForText(tipo);
+//   const extra = Object.entries(props).filter(
+//     ([k, v]) => !reservedKeys.includes(k) && hasValue(v),
+//   );
 
-  const extraHtml = extra.length
-    ? `<div class="popup-extra">${extra.map(([k, v]) => `<div class="popup-row"><span class="popup-label">${prettifyLabel(k)}</span><span class="popup-value">${v}</span></div>`).join("")}</div>`
-    : "";
+//   const extraHtml = extra.length
+//     ? `<div class="popup-extra">${extra.map(([k, v]) => `<div class="popup-row"><span class="popup-label">${prettifyLabel(k)}</span><span class="popup-value">${v}</span></div>`).join("")}</div>`
+//     : "";
 
-  return `
-    <div class="popup-card" style="--card-color:${color}">
-      <div class="popup-card__accent"></div>
-      <div class="popup-card__header">
-        <span class="popup-badge">${SHIELD_ICON_SVG}</span>
-        <div class="popup-card__title">
-          <strong>${nombre}</strong>
-          <span class="popup-card__type">${tipo}</span>
-        </div>
-      </div>
-      <div class="popup-card__body">
-        ${hasValue(props.description) ? `<p class="popup-desc">${props.description}</p>` : ""}
-        ${extraHtml}
-      </div>
-    </div>`;
-}
+//   return `
+//     <div class="popup-card" style="--card-color:${color}">
+//       <div class="popup-card__accent"></div>
+//       <div class="popup-card__header">
+//         <span class="popup-badge">${SHIELD_ICON_SVG}</span>
+//         <div class="popup-card__title">
+//           <strong>${nombre}</strong>
+//           <span class="popup-card__type">${tipo}</span>
+//         </div>
+//       </div>
+//       <div class="popup-card__body">
+//         ${hasValue(props.description) ? `<p class="popup-desc">${props.description}</p>` : ""}
+//         ${extraHtml}
+//       </div>
+//     </div>`;
+// }
 
 // ---------- 1) Slider de tamaño de marcador ----------
 const sizeSlider = document.getElementById("markerSize");
@@ -883,7 +1022,10 @@ document.addEventListener("click", (e) => {
     searchResults.innerHTML = "";
 });
 
-map.on("click", () => updateInfoPanel());
+map.on("click", () => {
+  updateInfoPanel();
+  closeDetailPanel();
+});
 
 // ---------- 4) Panel de Ajustes (drawer) ----------
 const settingsBtn = document.getElementById("settingsBtn");

@@ -5,7 +5,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1725014, 8.5825039, 0]
+        "coordinates": [
+          -71.1725014,
+          8.5825039,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 01 - Mérida",
@@ -13,17 +17,42 @@
         "icon": "icons/iapebm.png",
         "tipo": "IAPEBM - CCP",
         "personal uniformado": 130,
-        "estaciones": "3 - EL VALLE, EL VALLECITO, BELEN",
         "bicicletas": 20,
         "patrullas": 3,
-        "motos": 38
+        "motos": 38,
+        "tabla": [
+          {
+            "PARROQUIA": "CARACCIOLO PARRA PÉREZ",
+            "CUADRANTE": "22C-204",
+            "COMUNAS": "PROPUESTA DE CIRCUITO CARACCIOLO PARRA PÉREZ"
+          },
+          {
+            "PARROQUIA": "GONZALO PICÓN FEBRES",
+            "CUADRANTE": "22C-208",
+            "COMUNAS": "COMUNA SOCIALISTA CONDOR DE LOS ANDES"
+          },
+          {
+            "PARROQUIA": "DOMINGO PEÑA",
+            "CUADRANTE": "22C-214",
+            "COMUNAS": "BICENTENARIA 16 DE SEPTIEMBRE"
+          },
+          {
+            "PARROQUIA": "GONZALO PICÓN FEBRES",
+            "CUADRANTE": "22C-210",
+            "COMUNAS": "LA CUENCA DEL MUCUJÚN"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.174328, 8.5647733, 0]
+        "coordinates": [
+          -71.174328,
+          8.5647733,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 02 - Jacinto Plaza",
@@ -34,14 +63,68 @@
         "estaciones": "6 - DON PERUCHO, 5 AGUILAS BLANCAS, EL MORRO, ARICAGUA, LOS NEVADOS",
         "bicicletas": 0,
         "patrullas": 3,
-        "motos": 4
+        "motos": 4,
+        "tabla": [
+          {
+            "MUNICIPIO": "Aricagua",
+            "PARROQUIA": "San Antonio",
+            "CUADRANTE": "22C-178",
+            "COMUNAS": "CIRCUITO ELECTORAL ARICAGUA 1"
+          },
+          {
+            "MUNICIPIO": "Aricagua",
+            "PARROQUIA": "Aricagua",
+            "CUADRANTE": "22C-179",
+            "COMUNAS": "PUEBLO VIEJO"
+          },
+          {
+            "MUNICIPIO": "Aricagua",
+            "PARROQUIA": "Aricagua",
+            "CUADRANTE": "22C-180",
+            "COMUNAS": "CIRCUITO ELECTORAL ARICAGUA 2"
+          },
+          {
+            "MUNICIPIO": "Aricagua",
+            "PARROQUIA": "Aricagua",
+            "CUADRANTE": "22C-181",
+            "COMUNAS": "CIRCUITO CAPITAL ARICAGUA"
+          },
+          {
+            "MUNICIPIO": "Libertador",
+            "PARROQUIA": "El Morro",
+            "CUADRANTE": "22C-219",
+            "COMUNAS": "COMUNA AGRICOLA SOCIALISTA EL PARAMITO"
+          },
+          {
+            "MUNICIPIO": "Libertador",
+            "PARROQUIA": "El Morro",
+            "CUADRANTE": "22C-220",
+            "COMUNAS": "AGRO-TURISTICA Y SOCIAL MUCUBACHE"
+          },
+          {
+            "MUNICIPIO": "Libertador",
+            "PARROQUIA": "El Morro",
+            "CUADRANTE": "22C-221",
+            "COMUNAS": "EL QUINO MARIANO FLORES"
+          },
+          {
+            "MUNICIPIO": "Libertador",
+            "PARROQUIA": "Los Nevados",
+            "CUADRANTE": "22C-222",
+            "COMUNAS": "CIRCUITO LOS NEVADOS"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.2428538, 8.5463614, 0]
+        "coordinates": [
+          -71.2428538,
+          8.5463614,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 03 - Ejido",
@@ -52,14 +135,32 @@
         "estaciones": 0,
         "bicicletas": 0,
         "patrullas": 1,
-        "motos": 2
+        "motos": 2,
+        "tabla": [
+          {
+            "MUNICIPIO": "Campo Elías",
+            "PARROQUIA": "Matriz",
+            "CUADRANTE": "22C-196",
+            "COMUNAS": "SOCIALISTA LIBERTADORES DE CONCIENCIA BOLÍVAR Y CHÁVEZ"
+          },
+          {
+            "MUNICIPIO": "Campo Elías",
+            "PARROQUIA": "Montalban",
+            "CUADRANTE": "22C-198",
+            "COMUNAS": "AGROECOLOGICA TURISTICA DE MONTAÑA KLEBER RAMIREZ ROJAS"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.3885958, 8.5043327, 0]
+        "coordinates": [
+          -71.3885958,
+          8.5043327,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 04 . Lagunillas",
@@ -70,14 +171,62 @@
         "estaciones": "2 - SAN JUAN",
         "bicicletas": 0,
         "patrullas": 1,
-        "motos": 6
+        "motos": 6,
+        "tabla": [
+          {
+            "MUNICIPIO": "Sucre",
+            "PARROQUIA": "La Trampa",
+            "CUADRANTE": "22C-112",
+            "COMUNAS": "SAN PEDRO DE LA SABANA"
+          },
+          {
+            "MUNICIPIO": "Sucre",
+            "PARROQUIA": "La Trampa",
+            "CUADRANTE": "22C-113",
+            "COMUNAS": "AGROECOTURISTICA LOS CAÑABERALES"
+          },
+          {
+            "MUNICIPIO": "Sucre",
+            "PARROQUIA": "La Trampa",
+            "CUADRANTE": "22C-114",
+            "COMUNAS": "FORJADORES DE LA TRAMPA"
+          },
+          {
+            "MUNICIPIO": "Sucre",
+            "PARROQUIA": "La Trampa",
+            "CUADRANTE": "22C-115",
+            "COMUNAS": "AGROECOTURISTICA COMANDANTE INVENCIBLE"
+          },
+          {
+            "MUNICIPIO": "Sucre",
+            "PARROQUIA": "Lagunillas",
+            "CUADRANTE": "22C-116",
+            "COMUNAS": "ECOLOGICA AGRO TURISTICA DOÑA SIMONA"
+          },
+          {
+            "MUNICIPIO": "Sucre",
+            "PARROQUIA": "Lagunillas",
+            "CUADRANTE": "22C-117",
+            "COMUNAS": "CIRCUITO DIOSA JAMA"
+          },
+          {
+            "MUNICIPIO": "Sucre",
+            "PARROQUIA": "San Juan",
+            "CUADRANTE": "22C-118",
+            "COMUNAS": "SAN JUAN DE LOS LIBERTADORES COMANDANTE SUPREMO"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.7528171, 8.3304234, 0]
+        "coordinates": [
+          -71.7528171,
+          8.3304234,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 05 - Tovar",
@@ -88,14 +237,86 @@
         "estaciones": "3 - SANTA CRUZ, MESA BOLIVAR, ZEA",
         "bicicletas": 0,
         "patrullas": 1,
-        "motos": 7
+        "motos": 7,
+        "tabla": [
+          {
+            "MUNICIPIO": "Antonio Pinto Salinas",
+            "PARROQUIA": "Mesa Bolivar",
+            "CUADRANTE": "22C-126",
+            "COMUNAS": "PROPUESTA DE CIRCUITO CARACCIOLO PARRA PÉREZ"
+          },
+          {
+            "MUNICIPIO": "Antonio Pinto Salinas",
+            "PARROQUIA": "Santa Cruz de Mora",
+            "CUADRANTE": "22C-130",
+            "COMUNAS": "PROPUESTA DE CIRCUITO CARACCIOLO PARRA PÉREZ"
+          },
+          {
+            "MUNICIPIO": "Antonio Pinto Salinas",
+            "PARROQUIA": "Santa Cruz de Mora",
+            "CUADRANTE": "22C-131",
+            "COMUNAS": "PROPUESTA DE CIRCUITO CARACCIOLO PARRA PÉREZ"
+          },
+          {
+            "MUNICIPIO": "Antonio Pinto Salinas",
+            "PARROQUIA": "Santa Cruz de Mora",
+            "CUADRANTE": "22C-132",
+            "COMUNAS": "PROPUESTA DE CIRCUITO CARACCIOLO PARRA PÉREZ"
+          },
+          {
+            "MUNICIPIO": "Zea",
+            "PARROQUIA": "Zea",
+            "CUADRANTE": "22C-136",
+            "COMUNAS": "SOCIALISTA EL PODER DE CHAVEZ"
+          },
+          {
+            "MUNICIPIO": "Zea",
+            "PARROQUIA": "Zea",
+            "CUADRANTE": "22C-137",
+            "COMUNAS": "SOCIALISTA FRENTE PRODUCTIVO EN ACCION"
+          },
+          {
+            "MUNICIPIO": "Zea",
+            "PARROQUIA": "Zea",
+            "CUADRANTE": "22C-139",
+            "COMUNAS": "SOCIALISTA ZEA"
+          },
+          {
+            "MUNICIPIO": "Zea",
+            "PARROQUIA": "Zea",
+            "CUADRANTE": "22C-140",
+            "COMUNAS": "TIERRAS BENDITAS DE ZEA"
+          },
+          {
+            "MUNICIPIO": "Tovar",
+            "PARROQUIA": "Tovar",
+            "CUADRANTE": "22C-145",
+            "COMUNAS": "MARTIN TOVAR IPONTE"
+          },
+          {
+            "MUNICIPIO": "Tovar",
+            "PARROQUIA": "Tovar",
+            "CUADRANTE": "22C-146",
+            "COMUNAS": "CIRCUITO CASCO DE TOVAR"
+          },
+          {
+            "MUNICIPIO": "Tovar",
+            "PARROQUIA": "Tovar",
+            "CUADRANTE": "22C-147",
+            "COMUNAS": "CIRCUITO TURISTICO TOVAR"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.8290396, 8.250729, 0]
+        "coordinates": [
+          -71.8290396,
+          8.250729,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 06 - Bailadores",
@@ -106,14 +327,68 @@
         "estaciones": "2 - LA PALAYA, GUARAQUE",
         "bicicletas": 0,
         "patrullas": 2,
-        "motos": 4
+        "motos": 4,
+        "tabla": [
+          {
+            "MUNICIPIO": "Rivas Dávila",
+            "PARROQUIA": "Bailadores",
+            "CUADRANTE": "22C-154",
+            "COMUNAS": "TRADICIONES Y VIVENCIAS DE BODOQUE"
+          },
+          {
+            "MUNICIPIO": "Rivas Dávila",
+            "PARROQUIA": "Bailadores",
+            "CUADRANTE": "22C-155",
+            "COMUNAS": "BAILADORES 3"
+          },
+          {
+            "MUNICIPIO": "Rivas Dávila",
+            "PARROQUIA": "Bailadores",
+            "CUADRANTE": "22C-156",
+            "COMUNAS": "CIRCUITO OTRA BANDA CENTRO"
+          },
+          {
+            "MUNICIPIO": "Guaraque",
+            "PARROQUIA": "Guaraque",
+            "CUADRANTE": "22C-159",
+            "COMUNAS": "AGROTURISTICA CHAVEZ MAISANTA"
+          },
+          {
+            "MUNICIPIO": "Guaraque",
+            "PARROQUIA": "Guaraque",
+            "CUADRANTE": "22C-160",
+            "COMUNAS": "VENCEDORES DE CHAVEZ"
+          },
+          {
+            "MUNICIPIO": "Guaraque",
+            "PARROQUIA": "Mesa de Quintero",
+            "CUADRANTE": "22C-161",
+            "COMUNAS": "CIRCUITO ELECTORAL COMUNAL MESA DE QUINTERO"
+          },
+          {
+            "MUNICIPIO": "Guaraque",
+            "PARROQUIA": "Rio negro",
+            "CUADRANTE": "22C-162",
+            "COMUNAS": "RENACER BOLIVARIANO"
+          },
+          {
+            "MUNICIPIO": "Guaraque",
+            "PARROQUIA": "Rio negro",
+            "CUADRANTE": "22C-163",
+            "COMUNAS": "AGRO - PRODUCTIVA ANDRES MARQUEZ CARRERO"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.4601542, 8.1251216, 0]
+        "coordinates": [
+          -71.4601542,
+          8.1251216,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 07 - Canaguá",
@@ -124,14 +399,62 @@
         "estaciones": 0,
         "bicicletas": 0,
         "patrullas": 1,
-        "motos": 1
+        "motos": 1,
+        "tabla": [
+          {
+            "MUNICIPIO": "Arzobispo Chacón",
+            "PARROQUIA": "El Molino",
+            "CUADRANTE": "22C-166",
+            "COMUNAS": "PARROQUIA EL MOLINO"
+          },
+          {
+            "MUNICIPIO": "Arzobispo Chacón",
+            "PARROQUIA": "Canaguá",
+            "CUADRANTE": "22C-169",
+            "COMUNAS": "AGROECOTURISTICA CANAGUA"
+          },
+          {
+            "MUNICIPIO": "Arzobispo Chacón",
+            "PARROQUIA": "Canaguá",
+            "CUADRANTE": "22C-170",
+            "COMUNAS": "JUANA LA AVANZADORA"
+          },
+          {
+            "MUNICIPIO": "Arzobispo Chacón",
+            "PARROQUIA": "Canaguá",
+            "CUADRANTE": "22C-171",
+            "COMUNAS": "AGROPRODUCTIVA MORA REY"
+          },
+          {
+            "MUNICIPIO": "Arzobispo Chacón",
+            "PARROQUIA": "Mucuchachí",
+            "CUADRANTE": "22C-174",
+            "COMUNAS": "BATALLA EL ATAQUE"
+          },
+          {
+            "MUNICIPIO": "Arzobispo Chacón",
+            "PARROQUIA": "Mucutuy",
+            "CUADRANTE": "22C-176",
+            "COMUNAS": "AGROECOTURISTICA DANIEL RANGEL"
+          },
+          {
+            "MUNICIPIO": "Arzobispo Chacón",
+            "PARROQUIA": "Mucutuy",
+            "CUADRANTE": "22C-177",
+            "COMUNAS": "AGROPRODUCTIVA ALI PRIMERA"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.6495366, 8.6175672, 0]
+        "coordinates": [
+          -71.6495366,
+          8.6175672,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 08 - El Vigía",
@@ -143,14 +466,55 @@
         "bicicletas": 0,
         "patrullas": 2,
         "motos": 6,
-        "cuadrante": "22C-076, 22C-090, 22C-091, 22C-092, 22C-095, 22C-099, 22C-100"
+        "tabla": [
+          {
+            "MUNICIPIO": "Alberto Adriani",
+            "PARROQUIA": "Presidente Betancourt",
+            "CUADRANTE": "22C-090",
+            "COMUNAS": "MANUELITA SAENZ"
+          },
+          {
+            "MUNICIPIO": "Alberto Adriani",
+            "PARROQUIA": "Presidente Betancourt",
+            "CUADRANTE": "22C-091",
+            "COMUNAS": "FIELES A CHAVEZ"
+          },
+          {
+            "MUNICIPIO": "Alberto Adriani",
+            "PARROQUIA": "Presidente Betancourt",
+            "CUADRANTE": "22C-092",
+            "COMUNAS": "UNION DE CHAVEZ"
+          },
+          {
+            "MUNICIPIO": "Alberto Adriani",
+            "PARROQUIA": "Presidente Paez",
+            "CUADRANTE": "22C-095",
+            "COMUNAS": "COMUNA SOCIALISTA FRANCISCO DE MIRANDA"
+          },
+          {
+            "MUNICIPIO": "Alberto Adriani",
+            "PARROQUIA": "Presidente Paez",
+            "CUADRANTE": "22C-099",
+            "COMUNAS": "LUZ DEL ALBA"
+          },
+          {
+            "MUNICIPIO": "Alberto Adriani",
+            "PARROQUIA": "Presidente Paez",
+            "CUADRANTE": "22C-100",
+            "COMUNAS": "PRODUCTIVA PRESIDENTE OBRERO"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.4646172, 8.8189904, 0]
+        "coordinates": [
+          -71.4646172,
+          8.8189904,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 09 - Santa Elena de Arenales",
@@ -161,14 +525,44 @@
         "estaciones": "2 - LA AZULITA, GUAYABONES",
         "bicicletas": 0,
         "patrullas": 2,
-        "motos": 8
+        "motos": 8,
+        "tabla": [
+          {
+            "MUNICIPIO": "Andrés Bello",
+            "PARROQUIA": "La Azulita",
+            "CUADRANTE": "22C-076",
+            "COMUNAS": "CHUPULUN"
+          },
+          {
+            "MUNICIPIO": "Obispo Ramos de Lora",
+            "PARROQUIA": "Santa Elena de Arenales",
+            "CUADRANTE": "22C-068",
+            "COMUNAS": "LIBERTADORES DE LA REVOLUCION SANTA ELENA DE ARENALES"
+          },
+          {
+            "MUNICIPIO": "Obispo Ramos de Lora",
+            "PARROQUIA": "Santa Elena de Arenales",
+            "CUADRANTE": "22C-069",
+            "COMUNAS": "JESUS ANTONIO GUERRERO"
+          },
+          {
+            "MUNICIPIO": "Obispo Ramos de Lora",
+            "PARROQUIA": "Eloy Paredes",
+            "CUADRANTE": "22C-070",
+            "COMUNAS": "DR. CARLOS ESCARRA MALAVE"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.0926251, 9.1437828, 0]
+        "coordinates": [
+          -71.0926251,
+          9.1437828,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 10 - Nueva Bolivia",
@@ -179,14 +573,123 @@
         "estaciones": "11 - ARAPUEY, PALMARITO, SANTA APOLINIA, TUCANI, TORONDOY, PAC SAN PEDRO",
         "bicicletas": 0,
         "patrullas": 0,
-        "motos": 13
+        "motos": 13,
+        "tabla": [
+          {
+            "MUNICIPIO": "Julio Cesar Salas",
+            "PARROQUIA": "Arapuey",
+            "CUADRANTE": "22C-021",
+            "COMUNAS": "EL ARAPUEYENSE EL PORTAL DE MERIDA"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "María de la Concepcion Palacios Blanco",
+            "CUADRANTE": "22C-029",
+            "COMUNAS": "TURISTICA AGROINSDUSTRIAL HUGO CHAVEZ FRIAS"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Nueva Bolivia",
+            "CUADRANTE": "22C-030",
+            "COMUNAS": "REVOLUCIONARIA SOCIALISTA EL PORTAL DE MERIDA"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Nueva Bolivia",
+            "CUADRANTE": "22C-032",
+            "COMUNAS": "PRODUCTIVA AGROINDUSTRIAL TULIO FEBRES CORDERO"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Nueva Bolivia",
+            "CUADRANTE": "22C-033",
+            "COMUNAS": "SOCIALISTA NUEVA BOLIVIA"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Nueva Bolivia",
+            "CUADRANTE": "22C-034",
+            "COMUNAS": "COMUNA SOCIALISTA LUCHA BATALLA Y VICTORIA"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Nueva Bolivia",
+            "CUADRANTE": "22C-036",
+            "COMUNAS": "LAS HEROINAS"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Independecia",
+            "CUADRANTE": "22C-037",
+            "COMUNAS": "AFRODESCENDIENTE PALMARITO SOCIALISTA"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Independecia",
+            "CUADRANTE": "22C-040",
+            "COMUNAS": "COMUNA SOCIALISTA SAN PEDRO EL MIRANDINO"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Independecia",
+            "CUADRANTE": "22C-041",
+            "COMUNAS": "COMUNA MUYAPA REVOLUCIONARIA"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Santa Apolonia",
+            "CUADRANTE": "22C-044",
+            "COMUNAS": "COMUNA SOCIALISTA AGROTURISTICA SIMON BOLIVAR"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Santa Apolonia",
+            "CUADRANTE": "22C-045",
+            "COMUNAS": "COMUNA SOCIALISTA EZEQUIEL ZAMORA"
+          },
+          {
+            "MUNICIPIO": "Tulio Febres Cordero",
+            "PARROQUIA": "Santa Apolonia",
+            "CUADRANTE": "22C-046",
+            "COMUNAS": "SOCIALISTA AGRICOLA SIMON RODRIGUEZ"
+          },
+          {
+            "MUNICIPIO": "Caracciolo Parra Olmedo",
+            "PARROQUIA": "Tucaní",
+            "CUADRANTE": "22C-049",
+            "COMUNAS": "COMUNA SOCIALISTA BOLIVARIANA ROSA DE LOS 4 VIENTOS"
+          },
+          {
+            "MUNICIPIO": "Caracciolo Parra Olmedo",
+            "PARROQUIA": "Tucaní",
+            "CUADRANTE": "22C-050",
+            "COMUNAS": "ESPADA DE BOLIVAR"
+          },
+          {
+            "MUNICIPIO": "Caracciolo Parra Olmedo",
+            "PARROQUIA": "Tucaní",
+            "CUADRANTE": "22C-052",
+            "COMUNAS": "COMANDANTE ETERNO"
+          },
+          {
+            "MUNICIPIO": "Caracciolo Parra Olmedo",
+            "PARROQUIA": "Tucaní",
+            "CUADRANTE": "22C-053",
+            "COMUNAS": "ARBOL DE LAS 5 RAICES"
+          }
+        ]
+
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-70.921310040421, 8.74782070334422, 0]
+        "coordinates": [
+          -70.921310040421,
+          8.74782070334422,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 11 - Mucuchíes",
@@ -197,14 +700,44 @@
         "estaciones": "1 - TABAY",
         "bicicletas": 0,
         "patrullas": 2,
-        "motos": 8
+        "motos": 8,
+        "tabla": [
+          {
+            "MUNICIPIO": "Santos Marquina",
+            "PARROQUIA": "Tabay",
+            "CUADRANTE": "22C-223",
+            "COMUNAS": "GUATEQUE CHIMAJO"
+          },
+          {
+            "MUNICIPIO": "Santos Marquina",
+            "PARROQUIA": "Tabay",
+            "CUADRANTE": "22C-225",
+            "COMUNAS": "TABAY"
+          },
+          {
+            "MUNICIPIO": "Rangel",
+            "PARROQUIA": "Mucuchies",
+            "CUADRANTE": "22C-233",
+            "COMUNAS": "SOCIOPRODUCTIVA ALTO DE LA CARBONERA"
+          },
+          {
+            "MUNICIPIO": "Rangel",
+            "PARROQUIA": "Mucuchies",
+            "CUADRANTE": "22C-238",
+            "COMUNAS": "PARAMO EN REVOLUCION 2015"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-70.6973120405157, 8.86023360152238, 0]
+        "coordinates": [
+          -70.6973120405157,
+          8.86023360152238,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 12 - Santo Domingo",
@@ -215,14 +748,50 @@
         "estaciones": 0,
         "bicicletas": 0,
         "patrullas": 0,
-        "motos": 0
+        "motos": 0,
+        "tabla": [
+          {
+            "MUNICIPIO": "Cardenal Quintero",
+            "PARROQUIA": "Santo Domingo",
+            "CUADRANTE": "22C-001",
+            "COMUNAS": "PARAMO EN REVOLUCION 2015"
+          },
+          {
+            "MUNICIPIO": "Cardenal Quintero",
+            "PARROQUIA": "Las Piedras",
+            "CUADRANTE": "22C-002",
+            "COMUNAS": "EL LATIGO DE CHAVEZ"
+          },
+          {
+            "MUNICIPIO": "Cardenal Quintero",
+            "PARROQUIA": "Las Piedras",
+            "CUADRANTE": "22C-004",
+            "COMUNAS": "RENACER ANDINO"
+          },
+          {
+            "MUNICIPIO": "Pueblo Llano",
+            "PARROQUIA": "Pueblo Llano",
+            "CUADRANTE": "22C-006",
+            "COMUNAS": "CIRCUITO 1 PUEBLO LLANO"
+          },
+          {
+            "MUNICIPIO": "Pueblo Llano",
+            "PARROQUIA": "Pueblo Llano",
+            "CUADRANTE": "22C-007",
+            "COMUNAS": "EL GIGANTE HUGO CHAVEZ"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-70.7389547122437, 8.98600593969463, 0]
+        "coordinates": [
+          -70.7389547122437,
+          8.98600593969463,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 13 - Timotes",
@@ -233,14 +802,38 @@
         "estaciones": "2 - CHACHOPO",
         "bicicletas": 0,
         "patrullas": 0,
-        "motos": 0
+        "motos": 0,
+        "tabla": [
+          {
+            "MUNICIPIO": "Miranda",
+            "PARROQUIA": "La Venta",
+            "CUADRANTE": "22C-010",
+            "COMUNAS": "VALLE DE LA VENTA"
+          },
+          {
+            "MUNICIPIO": "Miranda",
+            "PARROQUIA": "Andrés Eloy Blanco",
+            "CUADRANTE": "22C-011",
+            "COMUNAS": "COMUNA CAMINO DE NEBLINA"
+          },
+          {
+            "MUNICIPIO": "Miranda",
+            "PARROQUIA": "Piñango",
+            "CUADRANTE": "22C-017",
+            "COMUNAS": "CIRCUITO ELECTORAL 1 PADRE NOGUERA"
+          }
+        ]
       }
     },
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.4648240003273, 7.71653729303219, 0]
+        "coordinates": [
+          -71.4648240003273,
+          7.71653729303219,
+          0
+        ]
       },
       "properties": {
         "name": "C.C.P 14 - Santa María de Caparo",
@@ -250,15 +843,33 @@
         "estaciones policiales": 0,
         "bicicletas": 0,
         "patrullas": 0,
-        "motos": 0
+        "motos": 0,
+        "tabla": [
+          {
+            "MUNICIPIO": "Padre Noguera",
+            "PARROQUIA": "Santa María de Caparo",
+            "CUADRANTE": "22C-164",
+            "COMUNAS": "CIRCUITO ELECTORAL 1 PADRE NOGUERA"
+          },
+          {
+            "MUNICIPIO": "Padre Noguera",
+            "PARROQUIA": "Santa María de Caparo",
+            "CUADRANTE": "22C-165",
+            "COMUNAS": "CIRCUITO ELECTORAL 2 PADRE NOGUERA"
+          }
+        ]
+
       }
     },
-
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.2021228, 8.5639055, 0]
+        "coordinates": [
+          -71.2021228,
+          8.5639055,
+          0
+        ]
       },
       "properties": {
         "name": "Servicio Medico - I.A.P.E.B.M",
@@ -271,7 +882,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1367948, 8.598491, 0]
+        "coordinates": [
+          -71.1367948,
+          8.598491,
+          0
+        ]
       },
       "properties": {
         "name": "Casilla Belén - I.A.P.E.B.M",
@@ -284,7 +899,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1681718, 8.5725627, 0]
+        "coordinates": [
+          -71.1681718,
+          8.5725627,
+          0
+        ]
       },
       "properties": {
         "name": "SIPPEBM - I.A.P.E.B.M",
@@ -296,7 +915,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1607589, 8.5814263, 0]
+        "coordinates": [
+          -71.1607589,
+          8.5814263,
+          0
+        ]
       },
       "properties": {
         "name": "UENNAPEBM - I.A.P.E.B.M",
@@ -309,7 +932,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1609308, 8.5813136, 0]
+        "coordinates": [
+          -71.1609308,
+          8.5813136,
+          0
+        ]
       },
       "properties": {
         "name": "DETRAMA - I.A.P.E.B.M",
@@ -322,7 +949,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1608624, 8.581364, 0]
+        "coordinates": [
+          -71.1608624,
+          8.581364,
+          0
+        ]
       },
       "properties": {
         "name": "Evidencia - I.A.P.E.B.M",
@@ -335,7 +966,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1599837, 8.592315, 0]
+        "coordinates": [
+          -71.1599837,
+          8.592315,
+          0
+        ]
       },
       "properties": {
         "name": "OIDP - I.A.P.E.B.M",
@@ -348,7 +983,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1416802, 8.6024447, 0]
+        "coordinates": [
+          -71.1416802,
+          8.6024447,
+          0
+        ]
       },
       "properties": {
         "name": "Policía Comunal - I.A.P.E.B.M",
@@ -361,7 +1000,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1423308, 8.5985684, 0]
+        "coordinates": [
+          -71.1423308,
+          8.5985684,
+          0
+        ]
       },
       "properties": {
         "name": "Brigada Ciclista - I.A.P.E.B.M",
@@ -374,7 +1017,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.359091, 8.5064942, 0]
+        "coordinates": [
+          -71.359091,
+          8.5064942,
+          0
+        ]
       },
       "properties": {
         "name": "UENNAPEBM - San Juan",
@@ -387,7 +1034,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1478092, 8.5981124, 0]
+        "coordinates": [
+          -71.1478092,
+          8.5981124,
+          0
+        ]
       },
       "properties": {
         "name": "Brigada - I.A.P.E.B.M",
@@ -399,7 +1050,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.4207041, 8.435486, 0]
+        "coordinates": [
+          -71.4207041,
+          8.435486,
+          0
+        ]
       },
       "properties": {
         "name": "Casilla Policial - Pueblos del Sur",
@@ -408,12 +1063,15 @@
         "tipo": "Dependencia IAPEBM"
       }
     },
-
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1586, 8.5916, 0]
+        "coordinates": [
+          -71.1586,
+          8.5916,
+          0
+        ]
       },
       "properties": {
         "name": "Delegación Estadal Mérida y DM Mérida",
@@ -426,7 +1084,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.6515, 8.6186, 0]
+        "coordinates": [
+          -71.6515,
+          8.6186,
+          0
+        ]
       },
       "properties": {
         "name": "DM Vigía",
@@ -439,7 +1101,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.7594, 8.3386, 0]
+        "coordinates": [
+          -71.7594,
+          8.3386,
+          0
+        ]
       },
       "properties": {
         "name": "DM Tovar",
@@ -448,12 +1114,15 @@
         "cuadrante": "22C-143"
       }
     },
-
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.1612368, 8.5846098, 0]
+        "coordinates": [
+          -71.1612368,
+          8.5846098,
+          0
+        ]
       },
       "properties": {
         "name": "Policía Municipal Libertador",
@@ -466,7 +1135,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.2360137, 8.5428468, 0]
+        "coordinates": [
+          -71.2360137,
+          8.5428468,
+          0
+        ]
       },
       "properties": {
         "name": "Policía Municipal Campo Elías",

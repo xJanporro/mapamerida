@@ -1,0 +1,479 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1725014, 8.5825039, 0]
+      },
+      "properties": {
+        "name": "C.C.P 01 - Mérida",
+        "description": "Avenida las Américas, Santa Bárbara Este, Edificio GRIM, Mérida",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 130,
+        "estaciones": "3 - EL VALLE, EL VALLECITO, BELEN",
+        "bicicletas": 20,
+        "patrullas": 3,
+        "motos": 38
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.174328, 8.5647733, 0]
+      },
+      "properties": {
+        "name": "C.C.P 02 - Jacinto Plaza",
+        "description": "Jacinto Plaza",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 36,
+        "estaciones": "6 - DON PERUCHO, 5 AGUILAS BLANCAS, EL MORRO, ARICAGUA, LOS NEVADOS",
+        "bicicletas": 0,
+        "patrullas": 3,
+        "motos": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.2428538, 8.5463614, 0]
+      },
+      "properties": {
+        "name": "C.C.P 03 - Ejido",
+        "description": "Ejido",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 49,
+        "estaciones": 0,
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.3885958, 8.5043327, 0]
+      },
+      "properties": {
+        "name": "C.C.P 04 . Lagunillas",
+        "description": "Lagunillas",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 30,
+        "estaciones": "2 - SAN JUAN",
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 6
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.7528171, 8.3304234, 0]
+      },
+      "properties": {
+        "name": "C.C.P 05 - Tovar",
+        "description": "Tovar",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 37,
+        "estaciones": "3 - SANTA CRUZ, MESA BOLIVAR, ZEA",
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 7
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.8290396, 8.250729, 0]
+      },
+      "properties": {
+        "name": "C.C.P 06 - Bailadores",
+        "description": "Bailadores",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 19,
+        "estaciones": "2 - LA PALAYA, GUARAQUE",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.4601542, 8.1251216, 0]
+      },
+      "properties": {
+        "name": "C.C.P 07 - Canaguá",
+        "description": "Canaguá",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 9,
+        "estaciones": 0,
+        "bicicletas": 0,
+        "patrullas": 1,
+        "motos": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.6495366, 8.6175672, 0]
+      },
+      "properties": {
+        "name": "C.C.P 08 - El Vigía",
+        "description": "El Vigía",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 112,
+        "estaciones": "3 - LA BLANCA, MUCUJEPE, LOS NARANJOS",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 6,
+        "cuadrante": "22C-076, 22C-090, 22C-091, 22C-092, 22C-095, 22C-099, 22C-100"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.4646172, 8.8189904, 0]
+      },
+      "properties": {
+        "name": "C.C.P 09 - Santa Elena de Arenales",
+        "description": "Santa Elena de Arenales",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 36,
+        "estaciones": "2 - LA AZULITA, GUAYABONES",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 8
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.0926251, 9.1437828, 0]
+      },
+      "properties": {
+        "name": "C.C.P 10 - Nueva Bolivia",
+        "description": "Av. 6, Nueva Bolivia, Mérida",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 68,
+        "estaciones": "11 - ARAPUEY, PALMARITO, SANTA APOLINIA, TUCANI, TORONDOY, PAC SAN PEDRO",
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 13
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-70.921310040421, 8.74782070334422, 0]
+      },
+      "properties": {
+        "name": "C.C.P 11 - Mucuchíes",
+        "description": "Mucuchíes",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 25,
+        "estaciones": "1 - TABAY",
+        "bicicletas": 0,
+        "patrullas": 2,
+        "motos": 8
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-70.6973120405157, 8.86023360152238, 0]
+      },
+      "properties": {
+        "name": "C.C.P 12 - Santo Domingo",
+        "description": "Santo Domingo",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 0,
+        "estaciones": 0,
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-70.7389547122437, 8.98600593969463, 0]
+      },
+      "properties": {
+        "name": "C.C.P 13 - Timotes",
+        "description": "Timotes",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 13,
+        "estaciones": "2 - CHACHOPO",
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.4648240003273, 7.71653729303219, 0]
+      },
+      "properties": {
+        "name": "C.C.P 14 - Santa María de Caparo",
+        "icon": "icons/iapebm.png",
+        "tipo": "IAPEBM - CCP",
+        "personal uniformado": 9,
+        "estaciones policiales": 0,
+        "bicicletas": 0,
+        "patrullas": 0,
+        "motos": 0
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.2021228, 8.5639055, 0]
+      },
+      "properties": {
+        "name": "Servicio Medico - I.A.P.E.B.M",
+        "description": "Av. J J Osuna",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1367948, 8.598491, 0]
+      },
+      "properties": {
+        "name": "Casilla Belén - I.A.P.E.B.M",
+        "description": "Av. 8 Paredes, Belén.",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1681718, 8.5725627, 0]
+      },
+      "properties": {
+        "name": "SIPPEBM - I.A.P.E.B.M",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1607589, 8.5814263, 0]
+      },
+      "properties": {
+        "name": "UENNAPEBM - I.A.P.E.B.M",
+        "description": "Av. 16 de Septiembre",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1609308, 8.5813136, 0]
+      },
+      "properties": {
+        "name": "DETRAMA - I.A.P.E.B.M",
+        "description": "Av. 16 de Septiembre",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1608624, 8.581364, 0]
+      },
+      "properties": {
+        "name": "Evidencia - I.A.P.E.B.M",
+        "description": "Av. 16 de Septiembre",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1599837, 8.592315, 0]
+      },
+      "properties": {
+        "name": "OIDP - I.A.P.E.B.M",
+        "description": "Los Sauzales",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1416802, 8.6024447, 0]
+      },
+      "properties": {
+        "name": "Policía Comunal - I.A.P.E.B.M",
+        "description": "Av. 1 Rodríguez Picón ",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1423308, 8.5985684, 0]
+      },
+      "properties": {
+        "name": "Brigada Ciclista - I.A.P.E.B.M",
+        "description": "Av. 4 Bolívar, Edif. Biblioteca Bolivariana",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.359091, 8.5064942, 0]
+      },
+      "properties": {
+        "name": "UENNAPEBM - San Juan",
+        "description": "El Calvario, San juan, Mérida",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1478092, 8.5981124, 0]
+      },
+      "properties": {
+        "name": "Brigada - I.A.P.E.B.M",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.4207041, 8.435486, 0]
+      },
+      "properties": {
+        "name": "Casilla Policial - Pueblos del Sur",
+        "description": "Pueblo Nuevo del Sur",
+        "icon": "icons/iapebm.png",
+        "tipo": "Dependencia IAPEBM"
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1586, 8.5916, 0]
+      },
+      "properties": {
+        "name": "Delegación Estadal Mérida y DM Mérida",
+        "icon": "icons/cicpc.png",
+        "tipo": "CICPC",
+        "cuadrante": "22C-205"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.6515, 8.6186, 0]
+      },
+      "properties": {
+        "name": "DM Vigía",
+        "icon": "icons/cicpc.png",
+        "tipo": "CICPC",
+        "cuadrante": "22C-085"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.7594, 8.3386, 0]
+      },
+      "properties": {
+        "name": "DM Tovar",
+        "icon": "icons/cicpc.png",
+        "tipo": "CICPC",
+        "cuadrante": "22C-143"
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.1612368, 8.5846098, 0]
+      },
+      "properties": {
+        "name": "Policía Municipal Libertador",
+        "description": "Avenida Urdaneta",
+        "icon": "icons/municipal_libertador.png",
+        "tipo": "Policía Municipal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.2360137, 8.5428468, 0]
+      },
+      "properties": {
+        "name": "Policía Municipal Campo Elías",
+        "description": "C. Los Molinos, Ejido",
+        "icon": "icons/municipal_campo_elias.png",
+        "tipo": "Policía Municipal"
+      }
+    }
+  ]
+}
