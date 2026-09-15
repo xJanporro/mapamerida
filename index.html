@@ -94,7 +94,7 @@
       </div>
 
       <div class="panel">
-        <h2>Buscar parroquia</h2>
+        <h2>Buscar parroquia o marcador</h2>
         <div class="search-wrap">
           <svg
             viewBox="0 0 24 24"
@@ -110,6 +110,7 @@
             id="searchBox"
             placeholder="Escribe un nombre..."
             autocomplete="off"
+            aria-label="Buscar parroquia o marcador"
           />
         </div>
         <div id="searchResults"></div>
@@ -139,6 +140,7 @@
             id="parroquiaFilterSearch"
             placeholder="Filtrar lista..."
             autocomplete="off"
+            aria-label="Filtrar lista de parroquias"
           />
         </div>
         <button id="clearParroquiaFilter" class="linklike">
@@ -461,6 +463,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
-    <script src="app.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/ui.js"></script>
   </body>
 </html>

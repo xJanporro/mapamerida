@@ -1510,3 +1510,76 @@ Tablas dentro del panel de detalle
 .detail-table td:first-child {
   font-weight: 500;
 }
+
+/* ---------- Coordenadas del cursor ---------- */
+.coords-control {
+  background: var(--panel-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  padding: 6px 10px;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+/* ---------- Resultados de búsqueda (parroquias + marcadores) ---------- */
+.search-result {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.search-result:hover {
+  background: var(--accent-soft);
+  border-color: var(--border);
+}
+.search-result__badge {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  color: #fff;
+}
+.search-result__badge svg {
+  width: 13px;
+  height: 13px;
+}
+.search-result__badge--parroquia {
+  background: var(--accent);
+  color: #fff;
+}
+.search-result__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.search-result__text strong {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-result__text small {
+  color: var(--text-faint);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-none {
+  padding: 8px 9px;
+  font-size: 12.5px;
+  color: var(--text-faint);
+}
